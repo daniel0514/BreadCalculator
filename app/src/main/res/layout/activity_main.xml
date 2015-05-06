@@ -91,7 +91,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/macaroonCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -102,7 +102,8 @@
                         android:text="@string/count_macaroon"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/macaroonInc"
                         android:layout_width="30dp"
@@ -145,7 +146,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/hamburgerCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -156,7 +157,8 @@
                         android:text="@string/count_hamburger"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/hamburgerInc"
                         android:layout_width="30dp"
@@ -198,7 +200,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -209,7 +211,8 @@
                         android:text="@string/count_specialdonut"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sDonutInc"
                         android:layout_width="30dp"
@@ -251,7 +254,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sPieCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -262,7 +265,8 @@
                         android:text="@string/count_strawberrypie"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sPieInc"
                         android:layout_width="30dp"
@@ -304,7 +308,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/pizzaCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -315,7 +319,8 @@
                         android:text="@string/count_pizza"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/pizzaInc"
                         android:layout_width="30dp"
@@ -357,7 +362,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/stDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -368,7 +373,8 @@
                         android:text="@string/count_strawberrydonut"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/stDonutInc"
                         android:layout_width="30dp"
@@ -410,7 +416,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/cBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -421,7 +427,8 @@
                         android:text="@string/count_creambread"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/cBreadInc"
                         android:layout_width="30dp"
@@ -463,7 +470,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sandwichCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -474,7 +481,8 @@
                         android:text="@string/count_sandwich"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sandwichInc"
                         android:layout_width="30dp"
@@ -516,7 +524,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sCupCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -527,7 +535,8 @@
                         android:text="@string/count_shamrockcupcake"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sCupCakeInc"
                         android:layout_width="30dp"
@@ -569,7 +578,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/chocolateCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -580,7 +589,8 @@
                         android:text="@string/count_chocolate"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/chocolateInc"
                         android:layout_width="30dp"
@@ -622,7 +632,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/cCupCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -633,7 +643,8 @@
                         android:text="@string/count_chococupcake"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/cCupCakeInc"
                         android:layout_width="30dp"
@@ -675,7 +686,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/bCCCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -686,7 +697,8 @@
                         android:text="@string/count_bigchoceccake"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/bCCInc"
                         android:layout_width="30dp"
@@ -728,7 +740,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/cCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -739,7 +751,8 @@
                         android:text="@string/count_christmascake"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/cCakeInc"
                         android:layout_width="30dp"
@@ -781,7 +794,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/rDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -792,7 +805,8 @@
                         android:text="@string/count_ricedonut"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/rDonutInc"
                         android:layout_width="30dp"
@@ -834,7 +848,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/croCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -845,7 +859,8 @@
                         android:text="@string/count_croissant"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/croInc"
                         android:layout_width="30dp"
@@ -887,7 +902,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sWrapCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -898,7 +913,8 @@
                         android:text="@string/count_snackwrap"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sWrapInc"
                         android:layout_width="30dp"
@@ -940,7 +956,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/jRollCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -951,7 +967,8 @@
                         android:text="@string/count_jellyroll"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/jRollInc"
                         android:layout_width="30dp"
@@ -993,7 +1010,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/breadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1004,7 +1021,8 @@
                         android:text="@string/count_bread"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/breadInc"
                         android:layout_width="30dp"
@@ -1046,7 +1064,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/hDogCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1057,7 +1075,8 @@
                         android:text="@string/count_hotdog"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/hDogInc"
                         android:layout_width="30dp"
@@ -1099,7 +1118,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/cDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1110,7 +1129,8 @@
                         android:text="@string/count_chocodonut"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/cDonutInc"
                         android:layout_width="30dp"
@@ -1152,7 +1172,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/mBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1163,7 +1183,8 @@
                         android:text="@string/count_morningbread"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/mBreadInc"
                         android:layout_width="30dp"
@@ -1205,7 +1226,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/sBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1216,7 +1237,8 @@
                         android:text="@string/count_sausagebread"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/sBreadInc"
                         android:layout_width="30dp"
@@ -1258,7 +1280,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
-                    <TextView
+                    <EditText
                         android:id="@+id/donutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
@@ -1269,7 +1291,8 @@
                         android:text="@string/count_donut"
                         android:gravity="center"
                         android:textSize="20sp"
-                        android:textColor="#d4b643"/>
+                        android:textColor="#d4b643"
+                        android:inputType="phone"/>
                     <ImageButton
                         android:id="@+id/donutInc"
                         android:layout_width="30dp"

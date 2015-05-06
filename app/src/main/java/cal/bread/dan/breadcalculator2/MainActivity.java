@@ -35,6 +35,10 @@ public class MainActivity extends ActionBarActivity {
         macInc = (ImageButton) findViewById(R.id.macaroonInc);
         macDec = (ImageButton) findViewById(R.id.macaroonDec);
         macCount = (TextView) findViewById(R.id.macaroonCount);
+
+    }
+
+    private void setListeners(){
         macInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +61,6 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-
-    }
-
-    private void setListeners(){
 
     }
 
