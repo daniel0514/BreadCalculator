@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/breadui"
+    android:id="@+id/breadui">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/topLeftPanel"
+        android:layout_marginEnd="443dp"
+        android:layout_marginTop="39dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="194dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignEnd="@+id/topLeftPanel"
+        android:layout_marginTop="129dp"
+        android:layout_alignTop="@+id/topLeftPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/topLeftPanel"
+        android:layout_marginBottom="9dp"
+        android:id="@+id/bottomLeftPanel"
+        android:src="@drawable/breadbar"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/topLeftPanel"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="28dp"
+        android:layout_alignBottom="@+id/bottomLeftPanel"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="48dp"
+        android:layout_toEndOf="@+id/bottomLeftPanel"
+        android:id="@+id/rightScrollPanel">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:layout_gravity="right">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/scroll">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/breadbar">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="3dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/macaroon"/>
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="fill_parent"></LinearLayout>
+                    <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/left"/>
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="fill_parent"
+                        android:background="@null"
+                        android:src="@null"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="7dp"
+                        android:text="0"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textColor="d4b643"/>
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/right"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
