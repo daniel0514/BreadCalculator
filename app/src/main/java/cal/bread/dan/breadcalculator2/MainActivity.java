@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -18,7 +19,9 @@ public class MainActivity extends ActionBarActivity {
     HashMap<String, Integer> breadHM;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-    Button macaroonInc;
+    ImageButton macInc;
+    ImageButton macDec;
+    TextView macCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,31 @@ public class MainActivity extends ActionBarActivity {
 
         breadHM = setupHashMap();
         updateBreadHM(breadHM);
+        macInc = (ImageButton) findViewById(R.id.macaroonInc);
+        macDec = (ImageButton) findViewById(R.id.macaroonDec);
+        macCount = (TextView) findViewById(R.id.macaroonCount);
+        macInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int macaroonCount = sharedPref.getInt("Macaroon", 0);
+                macaroonCount++;
+                editor.putInt("Macaroon", macaroonCount);
+                editor.commit();
+                macCount.setText(Integer.toString(macaroonCount));
+            }
+        });
+        macDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int macaroonCount = sharedPref.getInt("Macaroon", 0);
+                if(macaroonCount > 0) {
+                    macaroonCount--;
+                    editor.putInt("Macaroon", macaroonCount);
+                    editor.commit();
+                    macCount.setText(Integer.toString(macaroonCount));
+                }
+            }
+        });
 
     }
 
