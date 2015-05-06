@@ -47,10 +47,12 @@ public class BreadOptimizer {
 
     private TrainingList optimize1(Integer startStar, Integer endStar){
         for(String bread: breadHM.keySet()){
-            HashMap<String, Integer> newHM = new HashMap<>(breadHM);
-            newHM.put(bread, newHM.get(bread) - 1);
-            TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
-            listPQ.add(newTrainList);
+            if(breadHM.get(bread) > 0) {
+                HashMap<String, Integer> newHM = new HashMap<>(breadHM);
+                newHM.put(bread, newHM.get(bread) - 1);
+                TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
+                listPQ.add(newTrainList);
+            }
         }
 
         TrainingList tList;
@@ -63,10 +65,12 @@ public class BreadOptimizer {
                 tList.setCurStar(tList.getCurStar() + 1) ;
             }
             for(String bread: tList.getAvailableBread().keySet()){
-                HashMap<String, Integer> newHM = new HashMap<>(tList.getAvailableBread());
-                newHM.put(bread, newHM.get(bread) - 1);
-                TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
-                listPQ.add(newTrainList);
+                if(tList.getAvailableBread().get(bread) > 0) {
+                    HashMap<String, Integer> newHM = new HashMap<>(tList.getAvailableBread());
+                    newHM.put(bread, newHM.get(bread) - 1);
+                    TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
+                    listPQ.add(newTrainList);
+                }
             }
         }
         return null;

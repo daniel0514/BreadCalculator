@@ -18,6 +18,7 @@ public class MainActivity extends ActionBarActivity {
     HashMap<String, Integer> breadHM;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+    Button macaroonInc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,10 @@ public class MainActivity extends ActionBarActivity {
 
         breadHM = setupHashMap();
         updateBreadHM(breadHM);
+
+    }
+
+    private void setListeners(){
 
     }
 
