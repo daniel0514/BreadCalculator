@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.ImageButton;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -19,9 +18,14 @@ public class MainActivity extends ActionBarActivity {
     HashMap<String, Integer> breadHM;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-    ImageButton macInc;
-    ImageButton macDec;
-    TextView macCount;
+    private ImageButton macInc, macDec, hamInc, hamDec, sDonutInc, sDonutDec, sPieInc, sPieDec, pizzaInc, pizzaDec;
+    private ImageButton stDonutInc, stDonutDec, creamInc, creamDec, sandInc, sandDec, sCupInc, sCupDec, choInc, choDec;
+    private ImageButton cCupInc, cCupDec, bCCInc, bCCDec, cCakeInc, cCakeDec, rDonutInc, rDonutDec, croInc, croDec;
+    private ImageButton sWrapInc, sWrapDec, jRollInc, jRollDec, breadInc, breadDec, hDogInc, hDogDec, cDonutInc, cDonutDec;
+    private ImageButton mBreadInc, mBreadDec, sBreadInc, sBreadDec, donutInc, donutDec;
+    TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
+    TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDotCount, cDonutCount;
+    TextView mBreadCount, sBreadCount, donutCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +33,14 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-
         breadHM = setupHashMap();
         updateBreadHM(breadHM);
-        macInc = (ImageButton) findViewById(R.id.macaroonInc);
-        macDec = (ImageButton) findViewById(R.id.macaroonDec);
-        macCount = (TextView) findViewById(R.id.macaroonCount);
+        initializeButtons();
+        setListeners();
 
     }
+
+
 
     private void setListeners(){
         macInc.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +62,116 @@ public class MainActivity extends ActionBarActivity {
                     editor.putInt("Macaroon", macaroonCount);
                     editor.commit();
                     macCount.setText(Integer.toString(macaroonCount));
+                }
+            }
+        });
+        hamInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Hamburger", 0);
+                count++;
+                editor.putInt("Hamburger", count);
+                editor.commit();
+                hamCount.setText(Integer.toString(count));
+            }
+        });
+        hamDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Hamburger", 0);
+                if(count > 0) {
+                    count--;
+                    editor.putInt("Macaroon", count);
+                    editor.commit();
+                    hamCount.setText(Integer.toString(count));
+                }
+            }
+        });
+        sDonutInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Special Donut", 0);
+                count++;
+                editor.putInt("Special Donut", count);
+                editor.commit();
+                sDonutCount.setText(Integer.toString(count));
+            }
+        });
+        sDonutDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Special Donut", 0);
+                if(count > 0) {
+                    count--;
+                    editor.putInt("Special Donut", count);
+                    editor.commit();
+                    sDonutCount.setText(Integer.toString(count));
+                }
+            }
+        });
+        sPieInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Strawberry Pie", 0);
+                count++;
+                editor.putInt("Strawberry Pie", count);
+                editor.commit();
+                sPieCount.setText(Integer.toString(count));
+            }
+        });
+        sPieDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Strawberry Pie", 0);
+                if(count > 0) {
+                    count--;
+                    editor.putInt("Strawberry Pie", count);
+                    editor.commit();
+                    sPieCount.setText(Integer.toString(count));
+                }
+            }
+        });
+        sPieInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Strawberry Pie", 0);
+                count++;
+                editor.putInt("Strawberry Pie", count);
+                editor.commit();
+                sPieCount.setText(Integer.toString(count));
+            }
+        });
+        sPieDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Strawberry Pie", 0);
+                if(count > 0) {
+                    count--;
+                    editor.putInt("Strawberry Pie", count);
+                    editor.commit();
+                    sPieCount.setText(Integer.toString(count));
+                }
+            }
+        });
+        pizzaInc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Pizza", 0);
+                count++;
+                editor.putInt("Pizza", count);
+                editor.commit();
+                pizzaCount.setText(Integer.toString(count));
+            }
+        });
+        pizzaDec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count = sharedPref.getInt("Pizza", 0);
+                if (count > 0) {
+                    count--;
+                    editor.putInt("Pizza", count);
+                    editor.commit();
+                    pizzaCount.setText(Integer.toString(count));
                 }
             }
         });
@@ -118,6 +232,75 @@ public class MainActivity extends ActionBarActivity {
         breadHM.put("Chocolate", 0);
         breadHM.put("Shamrock Cup Cake", 0);
         return breadHM;
+    }
+    private void initializeButtons(){
+        macInc = (ImageButton) findViewById(R.id.macaroonInc);
+        macDec = (ImageButton) findViewById(R.id.macaroonDec);
+        macCount = (TextView) findViewById(R.id.macaroonCount);
+        hamInc = (ImageButton) findViewById(R.id.hamburgerInc);
+        hamDec = (ImageButton) findViewById(R.id.hamburgerDec);
+        hamCount = (TextView) findViewById(R.id.hamburgerCount);
+        sDonutInc = (ImageButton) findViewById(R.id.sDonutInc);
+        sDonutDec = (ImageButton) findViewById(R.id.sDonutDec);
+        sDonutCount = (TextView) findViewById(R.id.sDonutCount);
+        sPieInc = (ImageButton) findViewById(R.id.sPieInc);
+        sPieDec = (ImageButton) findViewById(R.id.sPieDec);
+        sPieCount = (TextView) findViewById(R.id.sPieCount);
+        pizzaInc = (ImageButton) findViewById(R.id.pizzaInc);
+        pizzaDec = (ImageButton) findViewById(R.id.pizzaDec);
+        pizzaCount = (TextView) findViewById(R.id.pizzaCount);
+        stDonutInc = (ImageButton) findViewById(R.id.stDonutInc);
+        stDonutDec = (ImageButton) findViewById(R.id.stDonutDec);
+        stDonutCount = (TextView) findViewById(R.id.stDonutCount);
+        creamInc = (ImageButton) findViewById(R.id.cBreadInc);
+        creamDec = (ImageButton) findViewById(R.id.cBreadDec);
+        creamCount = (TextView) findViewById(R.id.cBreadCount);
+        sandInc = (ImageButton) findViewById(R.id.sandwichInc);
+        sandDec = (ImageButton) findViewById(R.id.sandiwchDec);
+        sandCount = (TextView) findViewById(R.id.sandwichCount);
+        sCupInc = (ImageButton) findViewById(R.id.sCupCakeInc);
+        sCupDec = (ImageButton) findViewById(R.id.sCupCakeDec);
+        sCupCount = (TextView) findViewById(R.id.sCupCakeCount);
+        choInc = (ImageButton) findViewById(R.id.chocolateInc);
+        choDec = (ImageButton) findViewById(R.id.chocolateDec);
+        choCount = (TextView) findViewById(R.id.chocolateCount);
+        cCupInc = (ImageButton) findViewById(R.id.cCupCakeInc);
+        cCupDec = (ImageButton) findViewById(R.id.cCupCakeDec);
+        cCupCount = (TextView) findViewById(R.id.cCupCakeCount);
+        bCCInc = (ImageButton) findViewById(R.id.bCCInc);
+        bCCDec = (ImageButton) findViewById(R.id.bCCDec);
+        bCCCount = (TextView) findViewById(R.id.bCCCount);
+        cCakeInc = (ImageButton) findViewById(R.id.cCakeInc);
+        cCakeDec = (ImageButton) findViewById(R.id.cCakeDec);
+        cCakeCount = (TextView) findViewById(R.id.cCakeCount);
+        rDonutInc = (ImageButton) findViewById(R.id.rDonutInc);
+        rDonutDec = (ImageButton) findViewById(R.id.rDonutDec);
+        rDonutCount = (TextView) findViewById(R.id.rDonutCount);
+        sWrapInc = (ImageButton) findViewById(R.id.sWrapInc);
+        sWrapDec = (ImageButton) findViewById(R.id.sWrapDec);
+        sWrapCount = (TextView) findViewById(R.id.sWrapCount);
+        jRollInc = (ImageButton) findViewById(R.id.jRollInc);
+        jRollDec = (ImageButton) findViewById(R.id.jRollDec);
+        jRollCount = (TextView) findViewById(R.id.jRollCount);
+        breadInc = (ImageButton) findViewById(R.id.breadInc);
+        breadDec = (ImageButton) findViewById(R.id.breadDec);
+        breadCount = (TextView) findViewById(R.id.breadCount);
+        hDogInc = (ImageButton) findViewById(R.id.hDogInc);
+        hDogDec = (ImageButton) findViewById(R.id.hDogDec);
+        hDotCount = (TextView) findViewById(R.id.hDogCount);
+        cDonutInc = (ImageButton) findViewById(R.id.cDonutInc);
+        cDonutDec = (ImageButton) findViewById(R.id.cDonutDec);
+        cDonutCount = (TextView) findViewById(R.id.cDonutCount);
+        mBreadInc = (ImageButton) findViewById(R.id.mBreadInc);
+        mBreadDec = (ImageButton) findViewById(R.id.mBreadDec);
+        mBreadCount = (TextView) findViewById(R.id.mBreadCount);
+        sBreadInc = (ImageButton) findViewById(R.id.sBreadInc);
+        sBreadDec = (ImageButton) findViewById(R.id.sBreadDec);
+        sBreadCount = (TextView) findViewById(R.id.sBreadCount);
+        donutInc = (ImageButton) findViewById(R.id.donutInc);
+        donutDec = (ImageButton) findViewById(R.id.donutDec);
+        donutCount = (TextView) findViewById(R.id.donutCount);
+
     }
 
 }
