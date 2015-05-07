@@ -4,51 +4,20 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="@drawable/breadui"
+    android:background="@drawable/breadui2"
     android:id="@+id/breadui">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/topLeftPanel"
-        android:layout_marginEnd="443dp"
-        android:layout_marginTop="39dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="194dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignEnd="@+id/topLeftPanel"
-        android:layout_marginTop="129dp"
-        android:layout_alignTop="@+id/topLeftPanel"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/topLeftPanel"
-        android:layout_marginBottom="9dp"
-        android:id="@+id/bottomLeftPanel"
-        android:src="@drawable/breadbar"></LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@+id/topLeftPanel"
-        android:layout_marginStart="21dp"
+        android:layout_marginStart="223dp"
         android:layout_marginTop="28dp"
-        android:layout_alignBottom="@+id/bottomLeftPanel"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="48dp"
-        android:layout_toEndOf="@+id/bottomLeftPanel"
-        android:id="@+id/rightScrollPanel">
+        android:layout_marginBottom="56dp"
+        android:id="@+id/rightScrollPanel"
+        android:layout_alignParentBottom="true">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -1308,25 +1277,89 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@+id/rightScrollPanel"
-        android:layout_marginEnd="313dp"
-        android:layout_marginTop="137dp"
-        android:layout_alignTop="@+id/bottomLeftPanel"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="14dp"
         android:layout_alignEnd="@+id/rightScrollPanel"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/resetLayout">
+        android:layout_marginEnd="433dp"
+        android:id="@+id/linearLayout"
+        android:layout_alignBottom="@+id/rightScrollPanel"
+        android:weightSum="1"
+        android:layout_marginTop="168dp"
+        android:layout_alignTop="@+id/rightScrollPanel"
+        android:nestedScrollingEnabled="true">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset"
-            android:id="@+id/resetButton"
-            android:layout_gravity="center_horizontal"
-            android:background="@null"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Star"
+                android:id="@+id/startStar"
+                android:gravity="center"
+                android:layout_weight="0.50"
+                android:textColor="#efebd8"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_weight="0.50"
+                android:text="End Star"
+                android:id="@+id/endStar"
+                android:gravity="center"
+                android:textColor="#efebd8"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:weightSum="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Train"
+                android:id="@+id/startTrain"
+                android:gravity="center"
+                android:layout_weight="0.50"
+                android:textColor="#efebd8" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:text="End Train"
+                android:id="@+id/endTrain"
+                android:gravity="center"
+                android:layout_weight="0.50"
+                android:textColor="#efebd8"/>
+        </LinearLayout>
     </LinearLayout>
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:id="@+id/resetButton"
+        android:layout_marginStart="15dp"
+        android:background="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/rightScrollPanel" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Optimize"
+        android:id="@+id/optimize"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginEnd="42dp" />
 </RelativeLayout>

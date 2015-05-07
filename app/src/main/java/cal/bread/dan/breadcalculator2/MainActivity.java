@@ -1,13 +1,17 @@
 package cal.bread.dan.breadcalculator2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
@@ -27,7 +31,9 @@ public class MainActivity extends ActionBarActivity {
     TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
     TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDotCount, cDonutCount;
     TextView mBreadCount, sBreadCount, donutCount;
-    private Button reset;
+    private Button reset, optimize;
+    TextView startTrain, startStar, endTrain, endStar;
+    int startStarInt, endStarInt, startTrainInt, endTrainInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,62 @@ public class MainActivity extends ActionBarActivity {
         updateBreadHM(breadHM);
         initializeButtons();
         setListeners();
+        createAlerts();
 
+
+    }
+
+    private void createAlerts(){
+        AlertDialog.Builder alertSS = new AlertDialog.Builder(this);
+        final EditText inputSS = new EditText(this);
+        alertSS.setView(inputSS);
+        alertSS.setMessage("Set Current Hero Star");
+        inputSS.setFilters(new InputFilter[]{new InputFilterMinMax(1, 6)});
+        inputSS.setInputType(0x00000002);
+        alertSS.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                startStar.setText("Current Star: " + inputSS.getText());
+                startStarInt = Integer.parseInt(inputSS.getText().toString());
+            }
+        });
+        alertSS.show();
+        AlertDialog.Builder alertES = new AlertDialog.Builder(this);
+        final EditText inputES = new EditText(this);
+        inputES.setFilters(new InputFilter[]{new InputFilterMinMax(1,6)});
+        inputES.setInputType(0x00000002);
+        alertES.setMessage("Set Goal Hero Star");
+        alertES.setView(inputES);
+        alertES.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                endStar.setText("Goal Star: " + inputES.getText());
+                endStarInt = Integer.parseInt(inputES.getText().toString());
+            }
+        });
+        alertES.show();
+        AlertDialog.Builder alertST = new AlertDialog.Builder(this);
+        final EditText inputST = new EditText(this);
+        inputST.setInputType(0x00000002);
+        alertST.setMessage("Set Starting Hero Train");
+        alertST.setView(inputST);
+        alertST.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                startTrain.setText("Start Train: " + inputST.getText());
+                startTrainInt = Integer.parseInt(inputST.getText().toString());
+            }
+        });
+        alertST.show();
+        AlertDialog.Builder alertET = new AlertDialog.Builder(this);
+        final EditText inputET = new EditText(this);
+        inputET.setInputType(0x00000002);
+        alertET.setMessage("Set Goal Hero Train");
+        alertET.setView(inputET);
+        alertET.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                endTrain.setText("Goal Train: " + inputET.getText());
+                endTrainInt = Integer.parseInt(inputET.getText().toString());
+            }
+        });
+        alertET.show();
     }
 
     @Override
@@ -99,6 +160,11 @@ public class MainActivity extends ActionBarActivity {
     }
     private void initializeButtons(){
         reset = (Button) findViewById(R.id.resetButton);
+        optimize = (Button) findViewById(R.id.optimize);
+        startTrain = (TextView) findViewById(R.id.startTrain);
+        endTrain = (TextView) findViewById(R.id.endTrain);
+        startStar = (TextView) findViewById(R.id.startStar);
+        endStar = (TextView) findViewById(R.id.endStar);
         macInc = (ImageButton) findViewById(R.id.macaroonInc);
         macDec = (ImageButton) findViewById(R.id.macaroonDec);
         macCount = (TextView) findViewById(R.id.macaroonCount);
@@ -193,13 +259,12 @@ public class MainActivity extends ActionBarActivity {
         donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
-
     private void setListeners(){
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 breadHM = setupHashMap();
-                for(String name : breadHM.keySet()){
+                for(String name: breadHM.keySet()){
                     editor.putInt(name, 0);
                 }
                 editor.commit();
