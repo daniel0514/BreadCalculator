@@ -1307,4 +1307,26 @@
         </ScrollView>
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/rightScrollPanel"
+        android:layout_marginEnd="313dp"
+        android:layout_marginTop="137dp"
+        android:layout_alignTop="@+id/bottomLeftPanel"
+        android:layout_alignEnd="@+id/rightScrollPanel"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/resetLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:id="@+id/resetButton"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"/>
+    </LinearLayout>
+
+
 </RelativeLayout>

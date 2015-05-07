@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
@@ -26,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
     TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDotCount, cDonutCount;
     TextView mBreadCount, sBreadCount, donutCount;
+    private Button reset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,79 +98,114 @@ public class MainActivity extends ActionBarActivity {
         return breadHM;
     }
     private void initializeButtons(){
+        reset = (Button) findViewById(R.id.resetButton);
         macInc = (ImageButton) findViewById(R.id.macaroonInc);
         macDec = (ImageButton) findViewById(R.id.macaroonDec);
         macCount = (TextView) findViewById(R.id.macaroonCount);
+        macCount.setText(Integer.toString(sharedPref.getInt("Macaroon", 0)));
         hamInc = (ImageButton) findViewById(R.id.hamburgerInc);
         hamDec = (ImageButton) findViewById(R.id.hamburgerDec);
         hamCount = (TextView) findViewById(R.id.hamburgerCount);
+        hamCount.setText(Integer.toString(sharedPref.getInt("Hamburger", 0)));
         sDonutInc = (ImageButton) findViewById(R.id.sDonutInc);
         sDonutDec = (ImageButton) findViewById(R.id.sDonutDec);
         sDonutCount = (TextView) findViewById(R.id.sDonutCount);
+        sDonutCount.setText(Integer.toString(sharedPref.getInt("Special Donut", 0)));
         sPieInc = (ImageButton) findViewById(R.id.sPieInc);
         sPieDec = (ImageButton) findViewById(R.id.sPieDec);
         sPieCount = (TextView) findViewById(R.id.sPieCount);
+        sPieCount.setText(Integer.toString(sharedPref.getInt("Strawberry Pie", 0)));
         pizzaInc = (ImageButton) findViewById(R.id.pizzaInc);
         pizzaDec = (ImageButton) findViewById(R.id.pizzaDec);
         pizzaCount = (TextView) findViewById(R.id.pizzaCount);
+        pizzaCount.setText(Integer.toString(sharedPref.getInt("Pizza", 0)));
         stDonutInc = (ImageButton) findViewById(R.id.stDonutInc);
         stDonutDec = (ImageButton) findViewById(R.id.stDonutDec);
         stDonutCount = (TextView) findViewById(R.id.stDonutCount);
+        stDonutCount.setText(Integer.toString(sharedPref.getInt("Strawberry Donut", 0)));
         creamInc = (ImageButton) findViewById(R.id.cBreadInc);
         creamDec = (ImageButton) findViewById(R.id.cBreadDec);
         creamCount = (TextView) findViewById(R.id.cBreadCount);
+        creamCount.setText(Integer.toString(sharedPref.getInt("Cream Bread", 0)));
         sandInc = (ImageButton) findViewById(R.id.sandwichInc);
         sandDec = (ImageButton) findViewById(R.id.sandiwchDec);
         sandCount = (TextView) findViewById(R.id.sandwichCount);
+        sandCount.setText(Integer.toString(sharedPref.getInt("Sandwich", 0)));
         sCupInc = (ImageButton) findViewById(R.id.sCupCakeInc);
         sCupDec = (ImageButton) findViewById(R.id.sCupCakeDec);
         sCupCount = (TextView) findViewById(R.id.sCupCakeCount);
+        sCupCount.setText(Integer.toString(sharedPref.getInt("Shamrock Cup Cake", 0)));
         choInc = (ImageButton) findViewById(R.id.chocolateInc);
         choDec = (ImageButton) findViewById(R.id.chocolateDec);
         choCount = (TextView) findViewById(R.id.chocolateCount);
+        choCount.setText(Integer.toString(sharedPref.getInt("Chocolate", 0)));
         cCupInc = (ImageButton) findViewById(R.id.cCupCakeInc);
         cCupDec = (ImageButton) findViewById(R.id.cCupCakeDec);
         cCupCount = (TextView) findViewById(R.id.cCupCakeCount);
+        cCupCount.setText(Integer.toString(sharedPref.getInt("Choco Cup Cake", 0)));
         bCCInc = (ImageButton) findViewById(R.id.bCCInc);
         bCCDec = (ImageButton) findViewById(R.id.bCCDec);
         bCCCount = (TextView) findViewById(R.id.bCCCount);
+        bCCCount.setText(Integer.toString(sharedPref.getInt("Big Chocec Cake", 0)));
         cCakeInc = (ImageButton) findViewById(R.id.cCakeInc);
         cCakeDec = (ImageButton) findViewById(R.id.cCakeDec);
         cCakeCount = (TextView) findViewById(R.id.cCakeCount);
+        cCakeCount.setText(Integer.toString(sharedPref.getInt("Christmas Cake", 0)));
         rDonutInc = (ImageButton) findViewById(R.id.rDonutInc);
         rDonutDec = (ImageButton) findViewById(R.id.rDonutDec);
         rDonutCount = (TextView) findViewById(R.id.rDonutCount);
+        rDonutCount.setText(Integer.toString(sharedPref.getInt("Rice Donut", 0)));
         croInc = (ImageButton) findViewById(R.id.croInc);
         croDec = (ImageButton) findViewById(R.id.croDec);
         croCount = (TextView) findViewById(R.id.croCount);
+        croCount.setText(Integer.toString(sharedPref.getInt("Croissant", 0)));
         sWrapInc = (ImageButton) findViewById(R.id.sWrapInc);
         sWrapDec = (ImageButton) findViewById(R.id.sWrapDec);
         sWrapCount = (TextView) findViewById(R.id.sWrapCount);
+        sWrapCount.setText(Integer.toString(sharedPref.getInt("Snack Wrap", 0)));
         jRollInc = (ImageButton) findViewById(R.id.jRollInc);
         jRollDec = (ImageButton) findViewById(R.id.jRollDec);
         jRollCount = (TextView) findViewById(R.id.jRollCount);
+        jRollCount.setText(Integer.toString(sharedPref.getInt("Jelly Roll", 0)));
         breadInc = (ImageButton) findViewById(R.id.breadInc);
         breadDec = (ImageButton) findViewById(R.id.breadDec);
         breadCount = (TextView) findViewById(R.id.breadCount);
+        breadCount.setText(Integer.toString(sharedPref.getInt("Bread", 0)));
         hDogInc = (ImageButton) findViewById(R.id.hDogInc);
         hDogDec = (ImageButton) findViewById(R.id.hDogDec);
         hDotCount = (TextView) findViewById(R.id.hDogCount);
+        hDotCount.setText(Integer.toString(sharedPref.getInt("Hot Dog", 0)));
         cDonutInc = (ImageButton) findViewById(R.id.cDonutInc);
         cDonutDec = (ImageButton) findViewById(R.id.cDonutDec);
         cDonutCount = (TextView) findViewById(R.id.cDonutCount);
+        cDonutCount.setText(Integer.toString(sharedPref.getInt("Choco Donut", 0)));
         mBreadInc = (ImageButton) findViewById(R.id.mBreadInc);
         mBreadDec = (ImageButton) findViewById(R.id.mBreadDec);
         mBreadCount = (TextView) findViewById(R.id.mBreadCount);
+        mBreadCount.setText(Integer.toString(sharedPref.getInt("Morning Bread", 0)));
         sBreadInc = (ImageButton) findViewById(R.id.sBreadInc);
         sBreadDec = (ImageButton) findViewById(R.id.sBreadDec);
         sBreadCount = (TextView) findViewById(R.id.sBreadCount);
+        sBreadCount.setText(Integer.toString(sharedPref.getInt("Sausage Bread", 0)));
         donutInc = (ImageButton) findViewById(R.id.donutInc);
         donutDec = (ImageButton) findViewById(R.id.donutDec);
         donutCount = (TextView) findViewById(R.id.donutCount);
+        donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
 
     private void setListeners(){
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                breadHM = setupHashMap();
+                for(String name : breadHM.keySet()){
+                    editor.putInt(name, 0);
+                }
+                editor.commit();
+                initializeButtons();
+            }
+        });
         macInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
