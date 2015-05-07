@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -45,7 +47,15 @@ public class MainActivity extends ActionBarActivity {
         updateBreadHM(breadHM);
         initializeButtons();
         setListeners();
-        createAlerts();
+        //createAlerts();
+        startStar.setText("Current Star: " + "5");
+        startStarInt = Integer.parseInt("5");
+        endStar.setText("End Star: " + "5");
+        endStarInt = Integer.parseInt("5");
+        startTrain.setText("Current Train Star: " + "0");
+        startTrainInt = Integer.parseInt("0");
+        endTrain.setText("Current Star: " + "7900");
+        endTrainInt = Integer.parseInt("7900");
 
 
     }
@@ -260,6 +270,19 @@ public class MainActivity extends ActionBarActivity {
 
     }
     private void setListeners(){
+        optimize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Integer> goal = new ArrayList(4);
+                goal.add(startStarInt);
+                goal.add(endStarInt);
+                goal.add(startTrainInt);
+                goal.add(endTrainInt);
+                BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
+                TrainingList tList = optimizer.optimize();
+
+            }
+        });
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

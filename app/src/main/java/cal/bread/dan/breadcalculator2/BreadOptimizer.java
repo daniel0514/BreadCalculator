@@ -2,6 +2,7 @@ package cal.bread.dan.breadcalculator2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,17 +16,22 @@ import java.util.PriorityQueue;
 public class BreadOptimizer {
     PriorityQueue<TrainingList> listPQ;
     HashMap<String, Integer> breadHM;
-    List<Integer> train = Arrays.asList(100, 800, 2900, 7900, 18500);
-    List<Integer> trainRequired = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
+    List<Integer> train = Arrays.asList(0, 0, 100, 800, 2900, 7900, 18500);
+    List<Integer> trainRequired = new ArrayList<>(Collections.nCopies(7, 0));
     LinkedList<Bread> listOfBreads = new LinkedList<>();
+    int startStar, endStar, startTrain, endTrain;
     int sumTrain = 0;
     int totalTrainHas = 0;
 
-    public BreadOptimizer(HashMap<String, Integer> breadHM, List<Integer> goal) {
+    public BreadOptimizer(HashMap<String, Integer> breadHM, ArrayList<Integer> goal) {
         this.breadHM = breadHM;
-        creatingBread(breadHM);
+        //creatingBread(breadHM);
         listPQ = new PriorityQueue<>(100, new TrainingListComparator());
-        calculateTrainRequired(goal.get(0),goal.get(1),goal.get(2),goal.get(3));
+        startStar = goal.get(0);
+        endStar = goal.get(1);
+        startTrain = goal.get(2);
+        endTrain = goal.get(3);
+        calculateTrainRequired(startStar, endStar, startTrain, endTrain);
     }
 
     private  void creatingBread(HashMap<String, Integer> breadHM){
@@ -37,7 +43,7 @@ public class BreadOptimizer {
             }
         }
     }
-    public TrainingList optimize(Integer startStar, Integer endStar) {
+    public TrainingList optimize() {
         if(sumTrain <= totalTrainHas){
             return null;
         } else {

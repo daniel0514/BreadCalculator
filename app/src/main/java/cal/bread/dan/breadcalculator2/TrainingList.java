@@ -1,9 +1,10 @@
 package cal.bread.dan.breadcalculator2;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Collections;
 
 /**
  * Created by Dan on 05/05/2015.
@@ -11,7 +12,7 @@ import java.util.List;
 public class TrainingList {
     int totalCost = 0;
     int totalTrain = 0;
-    List<Integer> trainLevel = Arrays.asList(0, 0, 0, 0, 0);
+    List<Integer> trainLevel = new ArrayList<>(Collections.nCopies(7, 0));
     int lastPos = -1;
     int curStar;
     LinkedList<BreadList> breadLists = new LinkedList<>();
@@ -23,7 +24,7 @@ public class TrainingList {
     }
 
     public TrainingList(Integer startStar, HashMap<String, Integer> availableBread, BreadList breadList){
-        availableBread = new HashMap<>(availableBread);
+        this.availableBread = new HashMap<>(availableBread);
         breadLists.add(breadList);
         this.curStar = startStar;
         totalCost += breadList.getCost();
