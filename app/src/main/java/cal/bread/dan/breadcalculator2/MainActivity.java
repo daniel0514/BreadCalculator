@@ -48,17 +48,17 @@ public class MainActivity extends ActionBarActivity {
         updateBreadHM(breadHM);
         initializeButtons();
         setListeners();
-        createAlerts();
-        /*
+        //createAlerts();
+
         startStar.setText("Current Star: " + "4");
         startStarInt = Integer.parseInt("4");
         endStar.setText("End Star: " + "5");
         endStarInt = Integer.parseInt("5");
         startTrain.setText("Current Train Star: " + "0");
         startTrainInt = Integer.parseInt("0");
-        endTrain.setText("Current Star: " + "7900");
+        endTrain.setText("Goal Train: " + "7900");
         endTrainInt = Integer.parseInt("7900");
-        */
+
 
 
     }

@@ -1362,4 +1362,70 @@
         android:layout_below="@+id/linearLayout"
         android:layout_alignEnd="@+id/linearLayout"
         android:layout_marginEnd="42dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="87dp"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_alignTop="@+id/rightScrollPanel"
+        android:weightSum="1"
+        android:layout_above="@+id/optimize">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.51"
+            android:background="@color/background_floating_material_dark">
+            <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/bread0"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.51" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bread1"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.48" />
+
+            <ImageView
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:id="@+id/bread2" /></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:weightSum="1"
+            android:background="@color/background_floating_material_dark">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bread3"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.51" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/bread4"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.48" />
+
+            <ImageView
+                android:layout_width="66dp"
+                android:layout_height="match_parent"
+                android:id="@+id/bread5" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
