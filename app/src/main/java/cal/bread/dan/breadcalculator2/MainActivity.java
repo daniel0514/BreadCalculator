@@ -51,12 +51,12 @@ public class MainActivity extends ActionBarActivity {
         //createAlerts();
         startStar.setText("Current Star: " + "5");
         startStarInt = Integer.parseInt("5");
-        endStar.setText("End Star: " + "5");
-        endStarInt = Integer.parseInt("5");
+        endStar.setText("End Star: " + "6");
+        endStarInt = Integer.parseInt("6");
         startTrain.setText("Current Train Star: " + "0");
         startTrainInt = Integer.parseInt("0");
-        endTrain.setText("Current Star: " + "7900");
-        endTrainInt = Integer.parseInt("7900");
+        endTrain.setText("Current Star: " + "9000");
+        endTrainInt = Integer.parseInt("9000");
 
 
     }

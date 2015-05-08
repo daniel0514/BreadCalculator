@@ -111,7 +111,8 @@ public class BreadList {
         if(totalPercentage < 100){
             return totalTrain;
         } else {
-            return (int) (totalTrain * 1.5);
+            int returnVal = (int) (totalTrain * 1.5);
+            return returnVal;
         }
     }
     public int getPercentage(){

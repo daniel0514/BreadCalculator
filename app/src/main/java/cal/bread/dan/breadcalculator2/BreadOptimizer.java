@@ -63,12 +63,13 @@ public class BreadOptimizer {
 
         TrainingList tList;
         while(!listPQ.isEmpty()){
+            boolean incStar = false;
             tList = listPQ.poll();
             if(tList.getTrainLevel().get(tList.getCurStar()) >= trainRequired.get(tList.getCurStar())) {
                 if(tList.getCurStar()== endStar){
                     return tList;
                 }
-                tList.setCurStar(tList.getCurStar() + 1) ;
+                incStar = true;
             }
             for(String bread: tList.getAvailableBread().keySet()){
                 if(tList.getAvailableBread().get(bread) > 0) {
@@ -76,12 +77,19 @@ public class BreadOptimizer {
                     int breadCount = newHM.get(bread);
                     newHM.put(bread, breadCount - 1);
                     LinkedList<BreadList> newBLists = new LinkedList<>(tList.getLists());
-                    try {
-                        newBLists.getLast().addBread(bread);
-                    } catch (ListFullException e) {
-                        newBLists.add(new BreadList(tList.getCurStar(), bread));
+                    if(incStar){
+                        newBLists.add(new BreadList(tList.getCurStar() + 1, bread));
+                    } else {
+                        try {
+                            newBLists.getLast().addBread(bread);
+                        } catch (ListFullException e) {
+                            newBLists.add(new BreadList(tList.getCurStar(), bread));
+                        }
                     }
                     TrainingList newTrainList = new TrainingList(tList.curStar, newHM, newBLists);
+                    if(incStar){
+                        newTrainList.setCurStar(newTrainList.getCurStar() + 1);
+                    }
                     listPQ.add(newTrainList);
                 }
             }
@@ -94,12 +102,16 @@ public class BreadOptimizer {
             if (i == startStar) {
                 trainRequired.set(i, train.get(i) - startTrain);
                 sumTrain += train.get(i) - startTrain;
-            } else if (i == endStar) {
+            }
+            if (i == endStar) {
                 trainRequired.set(i,  endTrain);
-                sumTrain += endTrain;
-            } else {
+                if(startStar != endStar) {
+                    sumTrain += endTrain;
+                }
+            }
+            if( i != startStar && i != endStar){
                 trainRequired.set(i, train.get(i));
-                sumTrain  = train.get(i);
+                sumTrain += train.get(i) - startTrain;
             }
         }
     }
@@ -117,7 +129,7 @@ class TrainingListComparator implements Comparator<TrainingList> {
                 BreadList lhsList = lhs.getLists().get(i);
                 BreadList rhsList = rhs.getLists().get(i);
                 if(lhsList.getTrain() != rhsList.getTrain()) {
-                    return rhsList.getTrain() - lhsList.getTrain();
+                    return lhsList.getTrain() - rhsList.getTrain();
                 }
                 i++;
             }
