@@ -112,8 +112,10 @@ public class BreadOptimizer {
 class TrainingListComparator implements Comparator<TrainingList> {
     @Override
     public int compare(TrainingList lhs, TrainingList rhs) {
-        int diff = lhs.getCost() - rhs.getCost();
-
+        int diff = rhs.getCost() - lhs.getCost();
+        if(diff == 0){
+            return rhs.getTotalTrain()- lhs.getTotalTrain();
+        }
         return diff;
     }
 }

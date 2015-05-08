@@ -106,5 +106,8 @@ public class TrainingList {
     public List<Integer> getTrainLevel(){
         return trainLevel;
     }
+    public int getTotalTrain(){
+        return totalTrain;
+    }
 
 }

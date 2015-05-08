@@ -116,12 +116,16 @@ public class MainActivity extends ActionBarActivity {
     private void printBreadAlert(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         String message = "";
-        for(BreadList bList: tList.getLists()){
-            message += bList.size;
-            for(Bread bread : bList.getBreads()){
-                message += "|"+bread.getName() +"|";
+        if(tList != null) {
+            for (BreadList bList : tList.getLists()) {
+                message += bList.size;
+                for (Bread bread : bList.getBreads()) {
+                    message += "|" + bread.getName() + "|";
+                }
+                message += "\n\n";
             }
-            message += "\n\n";
+        } else {
+            message = "Not Enough Bread to Reach";
         }
         alert.setMessage(message);
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -161,29 +165,29 @@ public class MainActivity extends ActionBarActivity {
     }
     private LinkedHashMap<String, Integer> setupHashMap(){
         LinkedHashMap<String, Integer> breadHM = new LinkedHashMap<>();
-        breadHM.put("Morning Bread", 0);
-        breadHM.put("Bread", 0);
-        breadHM.put("Croissant", 0);
-        breadHM.put("Cream Bread", 0);
-        breadHM.put("Chocolate", 0);
-        breadHM.put("Strawberry Pie", 0);
         breadHM.put("Macaroon", 0);
-        breadHM.put("Choco Cup Cake", 0);
-        breadHM.put("Sausage Bread", 0);
-        breadHM.put("Hot Dog", 0);
-        breadHM.put("Snake Wrap", 0);
-        breadHM.put("Sandwich", 0);
-        breadHM.put("Pizza", 0);
         breadHM.put("Hamburger", 0);
-        breadHM.put("Christmas Cake", 0);
-        breadHM.put("Shamrock Cup Cake", 0);
-        breadHM.put("Donut", 0);
-        breadHM.put("Choco Donut", 0);
-        breadHM.put("Jelly Roll", 0);
-        breadHM.put("Rice Donut", 0);
-        breadHM.put("Strawberry Donut", 0);
         breadHM.put("Special Donut", 0);
+        breadHM.put("Strawberry Pie", 0);
+        breadHM.put("Chocolate", 0);
+        breadHM.put("Pizza", 0);
+        breadHM.put("Choco Cup Cake", 0);
+        breadHM.put("Shamrock Cup Cake", 0);
+        breadHM.put("Strawberry Donut", 0);
+        breadHM.put("Cream Bread", 0);
+        breadHM.put("Christmas Cake", 0);
+        breadHM.put("Sandwich", 0);
         breadHM.put("Big Choco Cake", 0);
+        breadHM.put("Rice Donut", 0);
+        breadHM.put("Croissant", 0);
+        breadHM.put("Snake Wrap", 0);
+        breadHM.put("Jelly Roll", 0);
+        breadHM.put("Bread", 0);
+        breadHM.put("Hot Dog", 0);
+        breadHM.put("Morning Bread", 0);
+        breadHM.put("Choco Donut", 0);
+        breadHM.put("Sausage Bread", 0);
+        breadHM.put("Donut", 0);
         return breadHM;
     }
     private void initializeButtons(){
@@ -291,6 +295,7 @@ public class MainActivity extends ActionBarActivity {
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateBreadHM(breadHM);
                 ArrayList<Integer> goal = new ArrayList(4);
                 goal.add(startStarInt);
                 goal.add(endStarInt);
@@ -573,7 +578,7 @@ public class MainActivity extends ActionBarActivity {
                     count--;
                     editor.putInt("Choco Cup Cake", count);
                     editor.commit();
-                    sandCount.setText(Integer.toString(count));
+                    cCupCount.setText(Integer.toString(count));
                 }
             }
         });

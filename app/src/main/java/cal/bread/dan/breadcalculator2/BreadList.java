@@ -22,7 +22,7 @@ public class BreadList {
     }
     public BreadList(int star, Bread bread){
         this.star = star;
-        breadList = new LinkedList<Bread>();
+        breadList = new LinkedList<>();
         breadList.add(bread);
         totalPercentage += bread.getPercentage();
         totalTrain += bread.getTrain();
