@@ -6,18 +6,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:background="@drawable/breadui2"
     android:id="@+id/breadui">
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Optimize"
+        android:id="@+id/optimize"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="550dp"/>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="223dp"
-        android:layout_marginTop="28dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="56dp"
-        android:id="@+id/rightScrollPanel"
-        android:layout_alignParentBottom="true">
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/rightScrollPanel">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -1275,74 +1281,20 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="14dp"
-        android:layout_alignEnd="@+id/rightScrollPanel"
-        android:layout_marginEnd="433dp"
-        android:id="@+id/linearLayout"
-        android:layout_alignBottom="@+id/rightScrollPanel"
-        android:weightSum="1"
-        android:layout_marginTop="168dp"
-        android:layout_alignTop="@+id/rightScrollPanel"
-        android:nestedScrollingEnabled="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="92dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:weightSum="1">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Start Star"
-                android:id="@+id/startStar"
-                android:gravity="center"
-                android:layout_weight="0.50"
-                android:textColor="#efebd8"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:layout_weight="0.50"
-                android:text="End Star"
-                android:id="@+id/endStar"
-                android:gravity="center"
-                android:textColor="#efebd8"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:weightSum="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Start Train"
-                android:id="@+id/startTrain"
-                android:gravity="center"
-                android:layout_weight="0.50"
-                android:textColor="#efebd8" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                android:text="End Train"
-                android:id="@+id/endTrain"
-                android:gravity="center"
-                android:layout_weight="0.50"
-                android:textColor="#efebd8"/>
-        </LinearLayout>
-    </LinearLayout>
-
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/lastList"
+        android:background="@drawable/leftsmall"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"/>
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/nextList"
+        android:background="@drawable/rightsmall"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="45dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -1354,78 +1306,75 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/rightScrollPanel" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Optimize"
-        android:id="@+id/optimize"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_marginEnd="42dp" />
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@+id/linearLayout"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="87dp"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:layout_alignTop="@+id/rightScrollPanel"
         android:weightSum="1"
-        android:layout_above="@+id/optimize">
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="120dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="443dp"
+        android:id="@+id/linearLayout">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.51"
-            android:background="@color/background_floating_material_dark">
+            android:layout_weight="0.50">
             <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/bread0"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.51" />
-
+                android:layout_weight="0.30"
+                android:background="@drawable/macaroon" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread1"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.48" />
-
+                android:background="@drawable/macaroon"
+                android:layout_weight="0.30"/>
             <ImageView
-                android:layout_width="66dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/bread2" /></LinearLayout>
-
+                android:id="@+id/bread2"
+                android:layout_weight="0.30"
+                android:background="@drawable/macaroon" />
+        </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
-            android:weightSum="1"
-            android:background="@color/background_floating_material_dark">
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread3"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.51" />
-
+                android:layout_weight="0.33"
+                android:background="@drawable/macaroon" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread4"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.48" />
-
+                android:background="@drawable/macaroon"
+                android:layout_weight="0.33"/>
             <ImageView
-                android:layout_width="66dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/bread5" />
+                android:id="@+id/bread5"
+                android:layout_weight="0.33"
+                android:background="@drawable/macaroon" />
         </LinearLayout>
     </LinearLayout>
+
+
+
 </RelativeLayout>

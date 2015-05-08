@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
     TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDotCount, cDonutCount;
     TextView mBreadCount, sBreadCount, donutCount;
     private Button reset, optimize;
-    TextView startTrain, startStar, endTrain, endStar;
+    //TextView startTrain, startStar, endTrain, endStar;
     int startStarInt, endStarInt, startTrainInt, endTrainInt;
     TrainingList tList;
 
@@ -49,16 +49,16 @@ public class MainActivity extends ActionBarActivity {
         initializeButtons();
         setListeners();
         //createAlerts();
-
+        /*
         startStar.setText("Current Star: " + "4");
-        startStarInt = Integer.parseInt("4");
         endStar.setText("End Star: " + "5");
-        endStarInt = Integer.parseInt("5");
         startTrain.setText("Current Train Star: " + "0");
-        startTrainInt = Integer.parseInt("0");
         endTrain.setText("Goal Train: " + "7900");
+        */
         endTrainInt = Integer.parseInt("7900");
-
+        startTrainInt = Integer.parseInt("0");
+        endStarInt = Integer.parseInt("5");
+        startStarInt = Integer.parseInt("4");
 
 
     }
@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity {
         inputSS.setInputType(0x00000002);
         alertSS.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                startStar.setText("Current Star: " + inputSS.getText());
+                //startStar.setText("Current Star: " + inputSS.getText());
                 startStarInt = Integer.parseInt(inputSS.getText().toString());
             }
         });
@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
         alertES.setView(inputES);
         alertES.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                endStar.setText("Goal Star: " + inputES.getText());
+                //endStar.setText("Goal Star: " + inputES.getText());
                 endStarInt = Integer.parseInt(inputES.getText().toString());
             }
         });
@@ -97,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
         alertST.setView(inputST);
         alertST.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                startTrain.setText("Start Train: " + inputST.getText());
+               // startTrain.setText("Start Train: " + inputST.getText());
                 startTrainInt = Integer.parseInt(inputST.getText().toString());
             }
         });
@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity {
         alertET.setView(inputET);
         alertET.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                endTrain.setText("Goal Train: " + inputET.getText());
+                //endTrain.setText("Goal Train: " + inputET.getText());
                 endTrainInt = Integer.parseInt(inputET.getText().toString());
             }
         });
@@ -199,10 +199,12 @@ public class MainActivity extends ActionBarActivity {
     private void initializeButtons(){
         reset = (Button) findViewById(R.id.resetButton);
         optimize = (Button) findViewById(R.id.optimize);
+        /*
         startTrain = (TextView) findViewById(R.id.startTrain);
         endTrain = (TextView) findViewById(R.id.endTrain);
         startStar = (TextView) findViewById(R.id.startStar);
         endStar = (TextView) findViewById(R.id.endStar);
+        */
         macInc = (ImageButton) findViewById(R.id.macaroonInc);
         macDec = (ImageButton) findViewById(R.id.macaroonDec);
         macCount = (TextView) findViewById(R.id.macaroonCount);
