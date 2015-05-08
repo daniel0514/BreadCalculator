@@ -117,12 +117,16 @@ public class MainActivity extends ActionBarActivity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         String message = "";
         if(tList != null) {
+            int cost = 0;
+            int train = 0;
             for (BreadList bList : tList.getLists()) {
                 message += bList.size;
                 for (Bread bread : bList.getBreads()) {
                     message += "|" + bread.getName() + "|";
                 }
-                message += "\n\n";
+                cost += bList.getCost();
+                train += bList.getTrain();
+                message +="|Cost: "+ cost + " |Train: " + train + "\n\n";
             }
         } else {
             message = "Not Enough Bread to Reach";

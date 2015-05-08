@@ -62,10 +62,8 @@ public class BreadOptimizer {
         }
 
         TrainingList tList;
-        int j = 0;
         while(!listPQ.isEmpty()){
             tList = listPQ.poll();
-            j++;
             if(tList.getTrainLevel().get(tList.getCurStar()) >= trainRequired.get(tList.getCurStar())) {
                 if(tList.getCurStar()== endStar){
                     return tList;
@@ -112,11 +110,21 @@ public class BreadOptimizer {
 class TrainingListComparator implements Comparator<TrainingList> {
     @Override
     public int compare(TrainingList lhs, TrainingList rhs) {
-        int diff = rhs.getCost() - lhs.getCost();
+        int diff = lhs.getCost() - rhs.getCost();
         if(diff == 0){
-            return rhs.getTotalTrain()- lhs.getTotalTrain();
+            int i = 0;
+            while( i < Math.min(rhs.getLists().size(), lhs.getLists().size())){
+                BreadList lhsList = lhs.getLists().get(i);
+                BreadList rhsList = rhs.getLists().get(i);
+                if(lhsList.getTrain() != rhsList.getTrain()) {
+                    return rhsList.getTrain() - lhsList.getTrain();
+                }
+                i++;
+            }
+            return 0;
+        } else {
+            return diff;
         }
-        return diff;
     }
 }
 
