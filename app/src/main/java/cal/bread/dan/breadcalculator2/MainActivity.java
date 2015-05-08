@@ -17,12 +17,12 @@ import android.widget.ImageButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
-    HashMap<String, Integer> breadHM;
+    LinkedHashMap<String, Integer> breadHM;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     private ImageButton macInc, macDec, hamInc, hamDec, sDonutInc, sDonutDec, sPieInc, sPieDec, pizzaInc, pizzaDec;
@@ -36,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
     private Button reset, optimize;
     TextView startTrain, startStar, endTrain, endStar;
     int startStarInt, endStarInt, startTrainInt, endTrainInt;
+    TrainingList tList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,24 @@ public class MainActivity extends ActionBarActivity {
         });
         alertET.show();
     }
+    private void printBreadAlert(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        String message = "";
+        for(BreadList bList: tList.getLists()){
+            message += bList.size;
+            for(Bread bread : bList.getBreads()){
+                message += "|"+bread.getName() +"|";
+            }
+            message += "\n\n";
+        }
+        alert.setMessage(message);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+            }
+        });
+        alert.show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,38 +153,37 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private void updateBreadHM(HashMap<String, Integer> breadHM){
+    private void updateBreadHM(LinkedHashMap<String, Integer> breadHM){
         Set<String> breads = breadHM.keySet();
         for(String name : breads) {
             breadHM.put(name, sharedPref.getInt(name,0));
         }
     }
-    private HashMap<String, Integer> setupHashMap(){
-        HashMap<String, Integer> breadHM = new HashMap<String, Integer>();
-        breadHM.put("Donut", 0);
-        breadHM.put("Sausage Bread", 0);
+    private LinkedHashMap<String, Integer> setupHashMap(){
+        LinkedHashMap<String, Integer> breadHM = new LinkedHashMap<>();
         breadHM.put("Morning Bread", 0);
-        breadHM.put("Choco Donut", 0);
-        breadHM.put("Hot Dog", 0);
         breadHM.put("Bread", 0);
-        breadHM.put("Jelly Roll", 0);
-        breadHM.put("Snake Wrap", 0);
         breadHM.put("Croissant", 0);
-        breadHM.put("Rice Donut", 0);
-        breadHM.put("Sandwich", 0);
         breadHM.put("Cream Bread", 0);
-        breadHM.put("Strawberry Donut", 0);
-        breadHM.put("Pizza", 0);
-        breadHM.put("Strawberry Pie", 0);
-        breadHM.put("Special Donut", 0);
-        breadHM.put("Hamburger", 0);
-        breadHM.put("Macaroon", 0);
-        breadHM.put("Christmas Cake", 0);
-        breadHM.put("Big Choco Cake", 0);
-        breadHM.put("Choco Cup Cake", 0);
         breadHM.put("Chocolate", 0);
+        breadHM.put("Strawberry Pie", 0);
+        breadHM.put("Macaroon", 0);
+        breadHM.put("Choco Cup Cake", 0);
+        breadHM.put("Sausage Bread", 0);
+        breadHM.put("Hot Dog", 0);
+        breadHM.put("Snake Wrap", 0);
+        breadHM.put("Sandwich", 0);
+        breadHM.put("Pizza", 0);
+        breadHM.put("Hamburger", 0);
+        breadHM.put("Christmas Cake", 0);
         breadHM.put("Shamrock Cup Cake", 0);
+        breadHM.put("Donut", 0);
+        breadHM.put("Choco Donut", 0);
+        breadHM.put("Jelly Roll", 0);
+        breadHM.put("Rice Donut", 0);
+        breadHM.put("Strawberry Donut", 0);
+        breadHM.put("Special Donut", 0);
+        breadHM.put("Big Choco Cake", 0);
         return breadHM;
     }
     private void initializeButtons(){
@@ -279,7 +297,8 @@ public class MainActivity extends ActionBarActivity {
                 goal.add(startTrainInt);
                 goal.add(endTrainInt);
                 BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
-                TrainingList tList = optimizer.optimize();
+                tList = optimizer.optimize();
+                printBreadAlert();
 
             }
         });
@@ -332,7 +351,7 @@ public class MainActivity extends ActionBarActivity {
                 int count = sharedPref.getInt("Hamburger", 0);
                 if(count > 0) {
                     count--;
-                    editor.putInt("Macaroon", count);
+                    editor.putInt("Hamburger", count);
                     editor.commit();
                     hamCount.setText(Integer.toString(count));
                 }

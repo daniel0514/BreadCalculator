@@ -24,15 +24,24 @@ public class BreadList {
         this.star = star;
         breadList = new LinkedList<Bread>();
         breadList.add(bread);
+        totalPercentage += bread.getPercentage();
+        totalTrain += bread.getTrain();
+        cost += levelCost.get(star);
+        size = 1;
     }
     public BreadList(int star, String bread){
         this.star = star;
-        breadList = new LinkedList<Bread>();
-        breadList.add(new Bread(bread));
+        Bread b = new Bread(bread);
+        breadList = new LinkedList<>();
+        breadList.add(b);
+        totalPercentage += b.getPercentage();
+        totalTrain += b.getTrain();
+        cost += levelCost.get(star);
+        size = 1;
     }
 
     public void addBread(String name) throws ListFullException{
-        if(size <= 6) {
+        if(size < 6) {
             Bread newBread = new Bread(name);
             breadList.add(newBread);
             totalPercentage += newBread.getPercentage();
@@ -44,7 +53,7 @@ public class BreadList {
         }
     }
     public void addBread(Bread bread) throws ListFullException{
-        if(size <= 6) {
+        if(size < 6) {
             breadList.add(bread);
             totalPercentage += bread.getPercentage();
             cost += levelCost.get(star);
@@ -115,6 +124,10 @@ public class BreadList {
 
     public int getStar(){
         return star;
+    }
+
+    public LinkedList<Bread> getBreads(){
+        return breadList;
     }
 
 }

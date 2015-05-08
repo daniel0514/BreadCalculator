@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.HashMap;
 import java.util.PriorityQueue;
 
 
@@ -15,7 +15,7 @@ import java.util.PriorityQueue;
  */
 public class BreadOptimizer {
     PriorityQueue<TrainingList> listPQ;
-    HashMap<String, Integer> breadHM;
+    LinkedHashMap<String, Integer> breadHM;
     List<Integer> train = Arrays.asList(0, 0, 100, 800, 2900, 7900, 18500);
     List<Integer> trainRequired = new ArrayList<>(Collections.nCopies(7, 0));
     LinkedList<Bread> listOfBreads = new LinkedList<>();
@@ -23,7 +23,7 @@ public class BreadOptimizer {
     int sumTrain = 0;
     int totalTrainHas = 0;
 
-    public BreadOptimizer(HashMap<String, Integer> breadHM, ArrayList<Integer> goal) {
+    public BreadOptimizer(LinkedHashMap<String, Integer> breadHM, ArrayList<Integer> goal) {
         this.breadHM = breadHM;
         //creatingBread(breadHM);
         listPQ = new PriorityQueue<>(100, new TrainingListComparator());
@@ -34,7 +34,7 @@ public class BreadOptimizer {
         calculateTrainRequired(startStar, endStar, startTrain, endTrain);
     }
 
-    private  void creatingBread(HashMap<String, Integer> breadHM){
+    private  void creatingBread(LinkedHashMap<String, Integer> breadHM){
         for(String breadName : breadHM.keySet()) {
             for(int i = 0; i < breadHM.get(breadName); i++){
                 Bread bread = new Bread(breadName);
@@ -54,7 +54,7 @@ public class BreadOptimizer {
     private TrainingList optimize1(Integer startStar, Integer endStar){
         for(String bread: breadHM.keySet()){
             if(breadHM.get(bread) > 0) {
-                HashMap<String, Integer> newHM = new HashMap<>(breadHM);
+                LinkedHashMap<String, Integer> newHM = new LinkedHashMap<>(breadHM);
                 newHM.put(bread, newHM.get(bread) - 1);
                 TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
                 listPQ.add(newTrainList);
@@ -62,8 +62,10 @@ public class BreadOptimizer {
         }
 
         TrainingList tList;
+        int j = 0;
         while(!listPQ.isEmpty()){
             tList = listPQ.poll();
+            j++;
             if(tList.getTrainLevel().get(tList.getCurStar()) >= trainRequired.get(tList.getCurStar())) {
                 if(tList.getCurStar()== endStar){
                     return tList;
@@ -72,9 +74,16 @@ public class BreadOptimizer {
             }
             for(String bread: tList.getAvailableBread().keySet()){
                 if(tList.getAvailableBread().get(bread) > 0) {
-                    HashMap<String, Integer> newHM = new HashMap<>(tList.getAvailableBread());
-                    newHM.put(bread, newHM.get(bread) - 1);
-                    TrainingList newTrainList = new TrainingList(startStar, newHM, new BreadList(startStar, bread));
+                    LinkedHashMap<String, Integer> newHM = new LinkedHashMap<>(tList.getAvailableBread());
+                    int breadCount = newHM.get(bread);
+                    newHM.put(bread, breadCount - 1);
+                    LinkedList<BreadList> newBLists = new LinkedList<>(tList.getLists());
+                    try {
+                        newBLists.getLast().addBread(bread);
+                    } catch (ListFullException e) {
+                        newBLists.add(new BreadList(tList.getCurStar(), bread));
+                    }
+                    TrainingList newTrainList = new TrainingList(tList.curStar, newHM, newBLists);
                     listPQ.add(newTrainList);
                 }
             }
@@ -103,7 +112,9 @@ public class BreadOptimizer {
 class TrainingListComparator implements Comparator<TrainingList> {
     @Override
     public int compare(TrainingList lhs, TrainingList rhs) {
-        return lhs.getCost() - rhs.getCost();
+        int diff = lhs.getCost() - rhs.getCost();
+
+        return diff;
     }
 }
 

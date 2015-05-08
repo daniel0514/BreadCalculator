@@ -1,7 +1,7 @@
 package cal.bread.dan.breadcalculator2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Collections;
@@ -16,21 +16,35 @@ public class TrainingList {
     int lastPos = -1;
     int curStar;
     LinkedList<BreadList> breadLists = new LinkedList<>();
-    HashMap<String, Integer> availableBread;
+    LinkedHashMap<String, Integer> availableBread;
 
-    public TrainingList(Integer startStar, HashMap<String, Integer> availableBread){
+    public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread){
         this.curStar = startStar;
-        availableBread = new HashMap<>(availableBread);
+        availableBread = new LinkedHashMap<>(availableBread);
     }
 
-    public TrainingList(Integer startStar, HashMap<String, Integer> availableBread, BreadList breadList){
-        this.availableBread = new HashMap<>(availableBread);
+    public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread, BreadList breadList){
+        this.availableBread = new LinkedHashMap<>(availableBread);
         breadLists.add(breadList);
         this.curStar = startStar;
         totalCost += breadList.getCost();
         totalTrain += breadList.getTrain();
+        trainLevel.set(breadList.getStar(), trainLevel.get(breadList.getStar()) + breadList.getTrain());
         lastPos++;
     }
+
+    public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread, LinkedList<BreadList> lists){
+        this.availableBread = new LinkedHashMap<>(availableBread);
+        breadLists = lists;
+        this.curStar = startStar;
+        for(BreadList list : lists){
+            totalCost += list.getCost();
+            totalTrain += list.getTrain();
+            trainLevel.set(list.getStar(), trainLevel.get(list.getStar()) + list.getTrain());
+        }
+        lastPos++;
+    }
+
 
     public void addList(BreadList breadList){
         breadLists.add(breadList);
@@ -69,12 +83,15 @@ public class TrainingList {
             totalCost += list.getCost();
         }
     }
+    public LinkedList<BreadList> getLists(){
+        return breadLists;
+    }
 
     public int getCost(){
         return totalCost;
     }
 
-    public HashMap<String, Integer> getAvailableBread(){
+    public LinkedHashMap<String, Integer> getAvailableBread(){
         return availableBread;
     }
 
