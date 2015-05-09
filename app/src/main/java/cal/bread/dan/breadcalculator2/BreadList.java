@@ -39,6 +39,17 @@ public class BreadList {
         cost += levelCost.get(star);
         size = 1;
     }
+    public BreadList(BreadList bList){
+        this.star = bList.getStar();
+        this.breadList = new LinkedList<>();
+        for(Bread b: bList.getBreads()){
+            this.breadList.add(b);
+            totalPercentage += b.getPercentage();
+            totalTrain += b.getTrain();
+            cost +=levelCost.get(this.star);
+            size++;
+        }
+    }
 
     public void addBread(String name) throws ListFullException{
         if(size < 6) {

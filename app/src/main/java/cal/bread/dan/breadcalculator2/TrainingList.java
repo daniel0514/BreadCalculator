@@ -12,7 +12,6 @@ import java.util.Collections;
 public class TrainingList {
     int totalCost = 0;
     List<Integer> trainLevel = new ArrayList<>(Collections.nCopies(7, 0));
-    int lastPos = -1;
     int curStar;
     LinkedList<BreadList> breadLists = new LinkedList<>();
     LinkedHashMap<String, Integer> availableBread;
@@ -23,7 +22,6 @@ public class TrainingList {
         this.curStar = startStar;
         totalCost += breadList.getCost();
         trainLevel.set(breadList.getStar(), trainLevel.get(breadList.getStar()) + breadList.getTrain());
-        lastPos++;
     }
 
     public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread, LinkedList<BreadList> lists){
@@ -34,7 +32,6 @@ public class TrainingList {
             totalCost += list.getCost();
             trainLevel.set(list.getStar(), trainLevel.get(list.getStar()) + list.getTrain());
         }
-        lastPos++;
     }
     public LinkedList<BreadList> getLists(){
         return breadLists;

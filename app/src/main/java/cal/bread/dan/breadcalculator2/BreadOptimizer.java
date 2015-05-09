@@ -18,14 +18,10 @@ public class BreadOptimizer {
     LinkedHashMap<String, Integer> breadHM;
     List<Integer> train = Arrays.asList(0, 0, 100, 800, 2900, 7900, 18500);
     List<Integer> trainRequired = new ArrayList<>(Collections.nCopies(7, 0));
-    LinkedList<Bread> listOfBreads = new LinkedList<>();
     int startStar, endStar, startTrain, endTrain;
-    int sumTrain = 0;
-    int totalTrainHas = 0;
 
     public BreadOptimizer(LinkedHashMap<String, Integer> breadHM, ArrayList<Integer> goal) {
         this.breadHM = breadHM;
-        //creatingBread(breadHM);
         listPQ = new PriorityQueue<>(100, new TrainingListComparator());
         startStar = goal.get(0);
         endStar = goal.get(1);
@@ -33,22 +29,8 @@ public class BreadOptimizer {
         endTrain = goal.get(3);
         calculateTrainRequired(startStar, endStar, startTrain, endTrain);
     }
-
-    private  void creatingBread(LinkedHashMap<String, Integer> breadHM){
-        for(String breadName : breadHM.keySet()) {
-            for(int i = 0; i < breadHM.get(breadName); i++){
-                Bread bread = new Bread(breadName);
-                listOfBreads.add(bread);
-                totalTrainHas += bread.getTrain();
-            }
-        }
-    }
     public TrainingList optimize() {
-        if(sumTrain <= totalTrainHas){
-            return null;
-        } else {
-            return optimize1(startStar, endStar);
-        }
+        return optimize1(startStar, endStar);
     }
 
     private TrainingList optimize1(Integer startStar, Integer endStar){
@@ -76,7 +58,10 @@ public class BreadOptimizer {
                     LinkedHashMap<String, Integer> newHM = new LinkedHashMap<>(tList.getAvailableBread());
                     int breadCount = newHM.get(bread);
                     newHM.put(bread, breadCount - 1);
-                    LinkedList<BreadList> newBLists = new LinkedList<>(tList.getLists());
+                    LinkedList<BreadList> newBLists = new LinkedList<>();
+                    for(BreadList bl: tList.getLists()){
+                        newBLists.add(new BreadList(bl));
+                    }
                     if(incStar){
                         newBLists.add(new BreadList(tList.getCurStar() + 1, bread));
                     } else {
@@ -86,7 +71,7 @@ public class BreadOptimizer {
                             newBLists.add(new BreadList(tList.getCurStar(), bread));
                         }
                     }
-                    TrainingList newTrainList = new TrainingList(tList.curStar, newHM, newBLists);
+                    TrainingList newTrainList = new TrainingList(tList.getCurStar(), newHM, newBLists);
                     if(incStar){
                         newTrainList.setCurStar(newTrainList.getCurStar() + 1);
                     }
@@ -101,17 +86,12 @@ public class BreadOptimizer {
         for (int i = startStar; i <= endStar; i++) {
             if (i == startStar) {
                 trainRequired.set(i, train.get(i) - startTrain);
-                sumTrain += train.get(i) - startTrain;
             }
             if (i == endStar) {
                 trainRequired.set(i,  endTrain);
-                if(startStar != endStar) {
-                    sumTrain += endTrain;
-                }
             }
             if( i != startStar && i != endStar){
                 trainRequired.set(i, train.get(i));
-                sumTrain += train.get(i) - startTrain;
             }
         }
     }

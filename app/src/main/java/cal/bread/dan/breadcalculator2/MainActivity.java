@@ -61,10 +61,10 @@ public class MainActivity extends ActionBarActivity {
         startTrain.setText("Current Train Star: " + "0");
         endTrain.setText("Goal Train: " + "7900");
         */
-        endTrainInt = Integer.parseInt("3000");
+        endTrainInt = Integer.parseInt("7900");
         startTrainInt = Integer.parseInt("0");
         endStarInt = Integer.parseInt("5");
-        startStarInt = Integer.parseInt("4");
+        startStarInt = Integer.parseInt("5");
         breadImages = new ArrayList<>(6);
         breadImages.add(bread0);
         breadImages.add(bread1);
