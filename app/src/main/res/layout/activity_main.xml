@@ -12,7 +12,7 @@
         android:text="Optimize"
         android:id="@+id/optimize"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="250dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="550dp"/>
     <LinearLayout
@@ -1282,19 +1282,18 @@
         </ScrollView>
     </LinearLayout>
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="15dp"
+        android:layout_height="110dp"
         android:id="@+id/lastList"
-        android:background="@drawable/leftsmall"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"/>
+        android:background="@drawable/bigleftarrow"
+        android:layout_marginTop="80dp"/>
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="15dp"
+        android:layout_height="110dp"
         android:id="@+id/nextList"
-        android:background="@drawable/rightsmall"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="45dp"/>
+        android:background="@drawable/bigrightarrow"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="210dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -1306,17 +1305,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/rightScrollPanel" />
 
-
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/star1"
+        android:id="@+id/listStar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"></ImageView>
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:weightSum="1"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="120dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="443dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="450dp"
         android:id="@+id/linearLayout">
 
         <LinearLayout
@@ -1329,21 +1334,18 @@
             android:layout_height="match_parent"
             android:id="@+id/bread0"
             android:layout_gravity="center_vertical"
-                android:layout_weight="0.30"
-                android:background="@drawable/macaroon" />
+                android:layout_weight="0.30"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread1"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/macaroon"
                 android:layout_weight="0.30"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread2"
-                android:layout_weight="0.30"
-                android:background="@drawable/macaroon" />
+                android:layout_weight="0.30" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -1357,21 +1359,18 @@
                 android:layout_height="match_parent"
                 android:id="@+id/bread3"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.33"
-                android:background="@drawable/macaroon" />
+                android:layout_weight="0.33"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread4"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/macaroon"
                 android:layout_weight="0.33"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/bread5"
-                android:layout_weight="0.33"
-                android:background="@drawable/macaroon" />
+                android:layout_weight="0.33"/>
         </LinearLayout>
     </LinearLayout>
 

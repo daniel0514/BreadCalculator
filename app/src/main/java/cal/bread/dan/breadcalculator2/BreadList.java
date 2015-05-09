@@ -131,4 +131,8 @@ public class BreadList {
         return breadList;
     }
 
+    public int getSize(){
+        return breadList.size();
+    }
+
 }

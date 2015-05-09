@@ -12,11 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
@@ -37,6 +39,9 @@ public class MainActivity extends ActionBarActivity {
     //TextView startTrain, startStar, endTrain, endStar;
     int startStarInt, endStarInt, startTrainInt, endTrainInt;
     TrainingList tList;
+    ImageView bread1, bread2, bread3, bread4, bread5, bread0, listStar;
+    ImageButton lastList, nextList;
+    ArrayList<ImageView> breadImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,13 @@ public class MainActivity extends ActionBarActivity {
         startTrainInt = Integer.parseInt("0");
         endStarInt = Integer.parseInt("5");
         startStarInt = Integer.parseInt("4");
+        breadImages = new ArrayList<>(6);
+        breadImages.add(bread0);
+        breadImages.add(bread1);
+        breadImages.add(bread2);
+        breadImages.add(bread3);
+        breadImages.add(bread4);
+        breadImages.add(bread5);
 
 
     }
@@ -199,6 +211,14 @@ public class MainActivity extends ActionBarActivity {
     private void initializeButtons(){
         reset = (Button) findViewById(R.id.resetButton);
         optimize = (Button) findViewById(R.id.optimize);
+        nextList = (ImageButton) findViewById(R.id.nextList);
+        lastList = (ImageButton) findViewById(R.id.lastList);
+        bread0 = (ImageView) findViewById(R.id.bread0);
+        bread1 = (ImageView) findViewById(R.id.bread1);
+        bread2 = (ImageView) findViewById(R.id.bread2);
+        bread3 = (ImageView) findViewById(R.id.bread3);
+        bread4 = (ImageView) findViewById(R.id.bread4);
+        bread5 = (ImageView) findViewById(R.id.bread5);
         /*
         startTrain = (TextView) findViewById(R.id.startTrain);
         endTrain = (TextView) findViewById(R.id.endTrain);
@@ -299,6 +319,14 @@ public class MainActivity extends ActionBarActivity {
         donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
+    private void setBreadImage(){
+        BreadList bList = tList.getLists().getFirst();
+        int size = bList.getSize();
+        for(int i = 0; i<size;i++){
+            Bread bread = bList.getBread(i);
+            breadImages.get(i).setImageResource(getResources().getIdentifier("drawable/"+bread.getName().toLowerCase().replace(" ", ""), null,getPackageName()));
+        }
+    }
     private void setListeners(){
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -312,7 +340,9 @@ public class MainActivity extends ActionBarActivity {
                 BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
                 tList = optimizer.optimize();
                 printBreadAlert();
-
+                if(tList != null){
+                    setBreadImage();
+                }
             }
         });
         reset.setOnClickListener(new View.OnClickListener() {
