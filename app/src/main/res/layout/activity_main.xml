@@ -1308,7 +1308,6 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/star1"
         android:id="@+id/listStar"
         android:layout_marginStart="10dp"
         android:layout_marginTop="60dp"></ImageView>

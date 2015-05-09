@@ -72,21 +72,6 @@ public class BreadList {
             size--;
         }
     }
-    public void removeBreadName(String name) {
-        if(size >= 1) {
-            for (int i = 0; i < size; i++) {
-                Bread bread = breadList.get(i);
-                if (name.equals(bread.getName())) {
-                    Bread removed = breadList.remove(i);
-                    cost -= levelCost.get(star);
-                    totalPercentage -= removed.getPercentage();
-                    totalTrain -= removed.getTrain();
-                    size--;
-                    break;
-                }
-            }
-        }
-    }
     public void removeBread(Bread removeBread) {
         String removeName = removeBread.getName();
         if(size >= 1) {

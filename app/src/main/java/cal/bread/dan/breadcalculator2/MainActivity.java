@@ -42,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     ImageView bread1, bread2, bread3, bread4, bread5, bread0, listStar;
     ImageButton lastList, nextList;
     ArrayList<ImageView> breadImages;
+    int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
         startTrain.setText("Current Train Star: " + "0");
         endTrain.setText("Goal Train: " + "7900");
         */
-        endTrainInt = Integer.parseInt("7900");
+        endTrainInt = Integer.parseInt("3000");
         startTrainInt = Integer.parseInt("0");
         endStarInt = Integer.parseInt("5");
         startStarInt = Integer.parseInt("4");
@@ -152,15 +153,12 @@ public class MainActivity extends ActionBarActivity {
         });
         alert.show();
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -209,6 +207,7 @@ public class MainActivity extends ActionBarActivity {
         return breadHM;
     }
     private void initializeButtons(){
+        listStar = (ImageView) findViewById(R.id.listStar);
         reset = (Button) findViewById(R.id.resetButton);
         optimize = (Button) findViewById(R.id.optimize);
         nextList = (ImageButton) findViewById(R.id.nextList);
@@ -319,15 +318,35 @@ public class MainActivity extends ActionBarActivity {
         donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
-    private void setBreadImage(){
-        BreadList bList = tList.getLists().getFirst();
+    private void setBreadImage(int index){
+        BreadList bList = tList.getLists().get(index);
         int size = bList.getSize();
+        int star = bList.getStar();
+        listStar.setImageResource(getResources().getIdentifier("drawable/star"+star, null, getPackageName()));
         for(int i = 0; i<size;i++){
             Bread bread = bList.getBread(i);
             breadImages.get(i).setImageResource(getResources().getIdentifier("drawable/"+bread.getName().toLowerCase().replace(" ", ""), null,getPackageName()));
         }
     }
     private void setListeners(){
+        nextList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tList != null && index < tList.getLists().size() - 1) {
+                    index++;
+                    setBreadImage(index);
+                }
+            }
+        });
+        lastList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(index > 0 && tList != null){
+                    index--;
+                    setBreadImage(index);
+                }
+            }
+        });
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -340,8 +359,9 @@ public class MainActivity extends ActionBarActivity {
                 BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
                 tList = optimizer.optimize();
                 printBreadAlert();
+                index = 0;
                 if(tList != null){
-                    setBreadImage();
+                    setBreadImage(index);
                 }
             }
         });

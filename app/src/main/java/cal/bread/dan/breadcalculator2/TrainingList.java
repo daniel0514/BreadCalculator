@@ -11,24 +11,17 @@ import java.util.Collections;
  */
 public class TrainingList {
     int totalCost = 0;
-    int totalTrain = 0;
     List<Integer> trainLevel = new ArrayList<>(Collections.nCopies(7, 0));
     int lastPos = -1;
     int curStar;
     LinkedList<BreadList> breadLists = new LinkedList<>();
     LinkedHashMap<String, Integer> availableBread;
 
-    public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread){
-        this.curStar = startStar;
-        availableBread = new LinkedHashMap<>(availableBread);
-    }
-
     public TrainingList(Integer startStar, LinkedHashMap<String, Integer> availableBread, BreadList breadList){
         this.availableBread = new LinkedHashMap<>(availableBread);
         breadLists.add(breadList);
         this.curStar = startStar;
         totalCost += breadList.getCost();
-        totalTrain += breadList.getTrain();
         trainLevel.set(breadList.getStar(), trainLevel.get(breadList.getStar()) + breadList.getTrain());
         lastPos++;
     }
@@ -39,49 +32,9 @@ public class TrainingList {
         this.curStar = startStar;
         for(BreadList list : lists){
             totalCost += list.getCost();
-            totalTrain += list.getTrain();
             trainLevel.set(list.getStar(), trainLevel.get(list.getStar()) + list.getTrain());
         }
         lastPos++;
-    }
-
-
-    public void addList(BreadList breadList){
-        breadLists.add(breadList);
-        totalCost += breadList.getCost();
-        totalTrain += breadList.getTrain();
-        lastPos++;
-    }
-
-    public void addBreadLastList(Bread bread){
-        BreadList breadList = breadLists.get(lastPos);
-        try {
-            breadList.addBread(bread);
-        }catch (ListFullException lfe){
-            BreadList newList = new BreadList(curStar);
-            try {
-                newList.addBread(bread);
-            } catch (ListFullException nlfe){
-
-            }
-            breadLists.add(newList);
-        }
-        recalculate();
-    }
-
-    public void removeBreadLastList(Bread bread){
-        BreadList breadList = breadLists.get(lastPos);
-        breadList.removeBread(bread);
-        recalculate();
-    }
-
-    private void recalculate(){
-        totalCost = 0;
-        for(BreadList list : breadLists){
-            int trainInLevel = trainLevel.get(list.getStar());
-            trainLevel.set(list.getStar(), trainInLevel + list.getTrain());
-            totalCost += list.getCost();
-        }
     }
     public LinkedList<BreadList> getLists(){
         return breadLists;
@@ -105,9 +58,6 @@ public class TrainingList {
 
     public List<Integer> getTrainLevel(){
         return trainLevel;
-    }
-    public int getTotalTrain(){
-        return totalTrain;
     }
 
 }
