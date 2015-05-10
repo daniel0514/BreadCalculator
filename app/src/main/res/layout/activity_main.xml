@@ -7,6 +7,50 @@
     android:background="@drawable/breadui2"
     android:id="@+id/breadui">
     <Button
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="265dp"
+        android:layout_marginStart="520dp"
+        android:background="@null"
+        android:text="Consume"
+        android:id="@+id/consume"/>
+    <TextView
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:text="Initial Train : "
+        android:textColor="#efebd8"
+        android:layout_marginTop="205dp"
+        android:layout_marginStart="20dp"
+        android:onClick="setInitialTrain"
+        android:id="@+id/setIniTrain"/>
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:text="Goal Train   : "
+        android:textColor="#efebd8"
+        android:layout_marginTop="225dp"
+        android:layout_marginStart="20dp"
+        android:onClick="setGoalTrain"
+        android:id="@+id/setGoalTrain"/>
+    <TextView
+        android:layout_width="190dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginStart="110dp"
+        android:text="Initial Star : "
+        android:textColor="#efebd8"
+        android:onClick="setInitialStar"
+        android:id="@+id/setIniStar"/>
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginStart="110dp"
+        android:text="Goal Star   : "
+        android:textColor="#efebd8"
+        android:onClick="setGoalStar"
+        android:id="@+id/setGoalStar"/>
+    <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Optimize"
@@ -67,7 +111,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/macaroonCount"
+                        android:id="@+id/MacaroonCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -122,7 +166,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/hamburgerCount"
+                        android:id="@+id/HamburgerCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -176,7 +220,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sDonutCount"
+                        android:id="@+id/SpecialDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -230,7 +274,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sPieCount"
+                        android:id="@+id/StrawberryPieCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -284,7 +328,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/pizzaCount"
+                        android:id="@+id/PizzaCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -338,7 +382,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/stDonutCount"
+                        android:id="@+id/StrawberryDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -392,7 +436,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/cBreadCount"
+                        android:id="@+id/CreamBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -446,7 +490,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sandwichCount"
+                        android:id="@+id/SandwichCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -500,7 +544,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sCupCakeCount"
+                        android:id="@+id/ShamrockCupCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -554,7 +598,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/chocolateCount"
+                        android:id="@+id/ChocolateCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -608,7 +652,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/cCupCakeCount"
+                        android:id="@+id/ChocoCupCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -662,7 +706,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/bCCCount"
+                        android:id="@+id/BigChocecCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -716,7 +760,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/cCakeCount"
+                        android:id="@+id/ChristmasCakeCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -770,7 +814,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/rDonutCount"
+                        android:id="@+id/RiceDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -824,7 +868,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/croCount"
+                        android:id="@+id/CroissantCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -878,7 +922,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sWrapCount"
+                        android:id="@+id/SnackWrapCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -932,7 +976,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/jRollCount"
+                        android:id="@+id/JellyRollCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -986,7 +1030,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/breadCount"
+                        android:id="@+id/BreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1040,7 +1084,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/hDogCount"
+                        android:id="@+id/HotDogCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1094,7 +1138,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/cDonutCount"
+                        android:id="@+id/ChocoDonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1148,7 +1192,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/mBreadCount"
+                        android:id="@+id/MorningBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1202,7 +1246,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/sBreadCount"
+                        android:id="@+id/SausageBreadCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1256,7 +1300,7 @@
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/left"/>
                     <TextView
-                        android:id="@+id/donutCount"
+                        android:id="@+id/DonutCount"
                         android:layout_width="50dp"
                         android:layout_height="fill_parent"
                         android:background="@null"
@@ -1285,13 +1329,13 @@
         android:layout_width="15dp"
         android:layout_height="110dp"
         android:id="@+id/lastList"
-        android:background="@drawable/bigleftarrow"
+        android:background="@null"
         android:layout_marginTop="80dp"/>
     <ImageButton
         android:layout_width="15dp"
         android:layout_height="110dp"
         android:id="@+id/nextList"
-        android:background="@drawable/bigrightarrow"
+        android:background="@null"
         android:layout_marginTop="80dp"
         android:layout_marginStart="210dp"/>
 

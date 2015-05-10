@@ -17,32 +17,35 @@ import android.widget.TextView;
 import android.widget.ImageButton;
 
 import java.lang.reflect.Array;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
-    LinkedHashMap<String, Integer> breadHM;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
+    private LinkedHashMap<String, Integer> breadHM;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
     private ImageButton macInc, macDec, hamInc, hamDec, sDonutInc, sDonutDec, sPieInc, sPieDec, pizzaInc, pizzaDec;
     private ImageButton stDonutInc, stDonutDec, creamInc, creamDec, sandInc, sandDec, sCupInc, sCupDec, choInc, choDec;
     private ImageButton cCupInc, cCupDec, bCCInc, bCCDec, cCakeInc, cCakeDec, rDonutInc, rDonutDec, croInc, croDec;
     private ImageButton sWrapInc, sWrapDec, jRollInc, jRollDec, breadInc, breadDec, hDogInc, hDogDec, cDonutInc, cDonutDec;
     private ImageButton mBreadInc, mBreadDec, sBreadInc, sBreadDec, donutInc, donutDec;
-    TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
-    TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDotCount, cDonutCount;
-    TextView mBreadCount, sBreadCount, donutCount;
-    private Button reset, optimize;
+    private TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
+    private TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDogCount, cDonutCount;
+    private TextView mBreadCount, sBreadCount, donutCount;
+    private TextView iniTrain, goalTrain, iniStar, goalStar;
+    private Button reset, optimize, consume;
     //TextView startTrain, startStar, endTrain, endStar;
-    int startStarInt, endStarInt, startTrainInt, endTrainInt;
-    TrainingList tList;
-    ImageView bread1, bread2, bread3, bread4, bread5, bread0, listStar;
-    ImageButton lastList, nextList;
-    ArrayList<ImageView> breadImages;
-    int index = 0;
+    private int startStarInt = -1, endStarInt = -1, startTrainInt = -1, endTrainInt = -1;
+    private TrainingList tList;
+    private ImageView bread1, bread2, bread3, bread4, bread5, bread0, listStar;
+    private ImageButton lastList, nextList;
+    private ArrayList<ImageView> breadImages;
+    private int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +57,12 @@ public class MainActivity extends ActionBarActivity {
         updateBreadHM(breadHM);
         initializeButtons();
         setListeners();
-        //createAlerts();
         /*
-        startStar.setText("Current Star: " + "4");
-        endStar.setText("End Star: " + "5");
-        startTrain.setText("Current Train Star: " + "0");
-        endTrain.setText("Goal Train: " + "7900");
-        */
         endTrainInt = Integer.parseInt("7900");
         startTrainInt = Integer.parseInt("0");
         endStarInt = Integer.parseInt("5");
         startStarInt = Integer.parseInt("5");
+        */
         breadImages = new ArrayList<>(6);
         breadImages.add(bread0);
         breadImages.add(bread1);
@@ -207,6 +205,7 @@ public class MainActivity extends ActionBarActivity {
         return breadHM;
     }
     private void initializeButtons(){
+        consume = (Button) findViewById(R.id.consume);
         listStar = (ImageView) findViewById(R.id.listStar);
         reset = (Button) findViewById(R.id.resetButton);
         optimize = (Button) findViewById(R.id.optimize);
@@ -218,103 +217,101 @@ public class MainActivity extends ActionBarActivity {
         bread3 = (ImageView) findViewById(R.id.bread3);
         bread4 = (ImageView) findViewById(R.id.bread4);
         bread5 = (ImageView) findViewById(R.id.bread5);
-        /*
-        startTrain = (TextView) findViewById(R.id.startTrain);
-        endTrain = (TextView) findViewById(R.id.endTrain);
-        startStar = (TextView) findViewById(R.id.startStar);
-        endStar = (TextView) findViewById(R.id.endStar);
-        */
+        iniStar = (TextView) findViewById(R.id.setIniStar);
+        iniTrain = (TextView) findViewById(R.id.setIniTrain);
+        goalTrain = (TextView) findViewById(R.id.setGoalTrain);
+        goalStar = (TextView) findViewById(R.id.setGoalStar);
         macInc = (ImageButton) findViewById(R.id.macaroonInc);
         macDec = (ImageButton) findViewById(R.id.macaroonDec);
-        macCount = (TextView) findViewById(R.id.macaroonCount);
+        macCount = (TextView) findViewById(R.id.MacaroonCount);
         macCount.setText(Integer.toString(sharedPref.getInt("Macaroon", 0)));
         hamInc = (ImageButton) findViewById(R.id.hamburgerInc);
         hamDec = (ImageButton) findViewById(R.id.hamburgerDec);
-        hamCount = (TextView) findViewById(R.id.hamburgerCount);
+        hamCount = (TextView) findViewById(R.id.HamburgerCount);
         hamCount.setText(Integer.toString(sharedPref.getInt("Hamburger", 0)));
         sDonutInc = (ImageButton) findViewById(R.id.sDonutInc);
         sDonutDec = (ImageButton) findViewById(R.id.sDonutDec);
-        sDonutCount = (TextView) findViewById(R.id.sDonutCount);
+        sDonutCount = (TextView) findViewById(R.id.SpecialDonutCount);
         sDonutCount.setText(Integer.toString(sharedPref.getInt("Special Donut", 0)));
         sPieInc = (ImageButton) findViewById(R.id.sPieInc);
         sPieDec = (ImageButton) findViewById(R.id.sPieDec);
-        sPieCount = (TextView) findViewById(R.id.sPieCount);
+        sPieCount = (TextView) findViewById(R.id.StrawberryPieCount);
         sPieCount.setText(Integer.toString(sharedPref.getInt("Strawberry Pie", 0)));
         pizzaInc = (ImageButton) findViewById(R.id.pizzaInc);
         pizzaDec = (ImageButton) findViewById(R.id.pizzaDec);
-        pizzaCount = (TextView) findViewById(R.id.pizzaCount);
+        pizzaCount = (TextView) findViewById(R.id.PizzaCount);
         pizzaCount.setText(Integer.toString(sharedPref.getInt("Pizza", 0)));
         stDonutInc = (ImageButton) findViewById(R.id.stDonutInc);
         stDonutDec = (ImageButton) findViewById(R.id.stDonutDec);
-        stDonutCount = (TextView) findViewById(R.id.stDonutCount);
+        stDonutCount = (TextView) findViewById(R.id.StrawberryDonutCount);
         stDonutCount.setText(Integer.toString(sharedPref.getInt("Strawberry Donut", 0)));
         creamInc = (ImageButton) findViewById(R.id.cBreadInc);
         creamDec = (ImageButton) findViewById(R.id.cBreadDec);
-        creamCount = (TextView) findViewById(R.id.cBreadCount);
+        creamCount = (TextView) findViewById(R.id.CreamBreadCount);
         creamCount.setText(Integer.toString(sharedPref.getInt("Cream Bread", 0)));
         sandInc = (ImageButton) findViewById(R.id.sandwichInc);
         sandDec = (ImageButton) findViewById(R.id.sandiwchDec);
-        sandCount = (TextView) findViewById(R.id.sandwichCount);
+        sandCount = (TextView) findViewById(R.id.SandwichCount);
         sandCount.setText(Integer.toString(sharedPref.getInt("Sandwich", 0)));
         sCupInc = (ImageButton) findViewById(R.id.sCupCakeInc);
         sCupDec = (ImageButton) findViewById(R.id.sCupCakeDec);
-        sCupCount = (TextView) findViewById(R.id.sCupCakeCount);
+        sCupCount = (TextView) findViewById(R.id.ShamrockCupCakeCount);
         sCupCount.setText(Integer.toString(sharedPref.getInt("Shamrock Cup Cake", 0)));
         choInc = (ImageButton) findViewById(R.id.chocolateInc);
         choDec = (ImageButton) findViewById(R.id.chocolateDec);
-        choCount = (TextView) findViewById(R.id.chocolateCount);
+        choCount = (TextView) findViewById(R.id.ChocolateCount);
         choCount.setText(Integer.toString(sharedPref.getInt("Chocolate", 0)));
         cCupInc = (ImageButton) findViewById(R.id.cCupCakeInc);
         cCupDec = (ImageButton) findViewById(R.id.cCupCakeDec);
-        cCupCount = (TextView) findViewById(R.id.cCupCakeCount);
+        cCupCount = (TextView) findViewById(R.id.ChocoCupCakeCount);
         cCupCount.setText(Integer.toString(sharedPref.getInt("Choco Cup Cake", 0)));
         bCCInc = (ImageButton) findViewById(R.id.bCCInc);
         bCCDec = (ImageButton) findViewById(R.id.bCCDec);
-        bCCCount = (TextView) findViewById(R.id.bCCCount);
+        bCCCount = (TextView) findViewById(R.id.BigChocecCakeCount);
         bCCCount.setText(Integer.toString(sharedPref.getInt("Big Chocec Cake", 0)));
         cCakeInc = (ImageButton) findViewById(R.id.cCakeInc);
         cCakeDec = (ImageButton) findViewById(R.id.cCakeDec);
-        cCakeCount = (TextView) findViewById(R.id.cCakeCount);
+        cCakeCount = (TextView) findViewById(R.id.ChristmasCakeCount);
         cCakeCount.setText(Integer.toString(sharedPref.getInt("Christmas Cake", 0)));
         rDonutInc = (ImageButton) findViewById(R.id.rDonutInc);
         rDonutDec = (ImageButton) findViewById(R.id.rDonutDec);
-        rDonutCount = (TextView) findViewById(R.id.rDonutCount);
+        rDonutCount = (TextView) findViewById(R.id.RiceDonutCount);
         rDonutCount.setText(Integer.toString(sharedPref.getInt("Rice Donut", 0)));
         croInc = (ImageButton) findViewById(R.id.croInc);
         croDec = (ImageButton) findViewById(R.id.croDec);
-        croCount = (TextView) findViewById(R.id.croCount);
+        croCount = (TextView) findViewById(R.id.CroissantCount);
         croCount.setText(Integer.toString(sharedPref.getInt("Croissant", 0)));
         sWrapInc = (ImageButton) findViewById(R.id.sWrapInc);
         sWrapDec = (ImageButton) findViewById(R.id.sWrapDec);
-        sWrapCount = (TextView) findViewById(R.id.sWrapCount);
+        sWrapCount = (TextView) findViewById(R.id.SnackWrapCount);
         sWrapCount.setText(Integer.toString(sharedPref.getInt("Snack Wrap", 0)));
         jRollInc = (ImageButton) findViewById(R.id.jRollInc);
         jRollDec = (ImageButton) findViewById(R.id.jRollDec);
-        jRollCount = (TextView) findViewById(R.id.jRollCount);
+        jRollCount = (TextView) findViewById(R.id.JellyRollCount);
         jRollCount.setText(Integer.toString(sharedPref.getInt("Jelly Roll", 0)));
         breadInc = (ImageButton) findViewById(R.id.breadInc);
         breadDec = (ImageButton) findViewById(R.id.breadDec);
-        breadCount = (TextView) findViewById(R.id.breadCount);
+        breadCount = (TextView) findViewById(R.id.BreadCount);
         breadCount.setText(Integer.toString(sharedPref.getInt("Bread", 0)));
         hDogInc = (ImageButton) findViewById(R.id.hDogInc);
         hDogDec = (ImageButton) findViewById(R.id.hDogDec);
-        hDotCount = (TextView) findViewById(R.id.hDogCount);
-        hDotCount.setText(Integer.toString(sharedPref.getInt("Hot Dog", 0)));
+        hDogCount = (TextView) findViewById(R.id.HotDogCount);
+        hDogCount.setText(Integer.toString(sharedPref.getInt("Hot Dog", 0)));
         cDonutInc = (ImageButton) findViewById(R.id.cDonutInc);
         cDonutDec = (ImageButton) findViewById(R.id.cDonutDec);
-        cDonutCount = (TextView) findViewById(R.id.cDonutCount);
+        cDonutCount = (TextView) findViewById(R.id.ChocoDonutCount);
         cDonutCount.setText(Integer.toString(sharedPref.getInt("Choco Donut", 0)));
         mBreadInc = (ImageButton) findViewById(R.id.mBreadInc);
         mBreadDec = (ImageButton) findViewById(R.id.mBreadDec);
-        mBreadCount = (TextView) findViewById(R.id.mBreadCount);
+        mBreadCount = (TextView) findViewById(R.id.MorningBreadCount);
         mBreadCount.setText(Integer.toString(sharedPref.getInt("Morning Bread", 0)));
         sBreadInc = (ImageButton) findViewById(R.id.sBreadInc);
         sBreadDec = (ImageButton) findViewById(R.id.sBreadDec);
-        sBreadCount = (TextView) findViewById(R.id.sBreadCount);
+        sBreadCount = (TextView) findViewById(R.id.SausageBreadCount);
         sBreadCount.setText(Integer.toString(sharedPref.getInt("Sausage Bread", 0)));
         donutInc = (ImageButton) findViewById(R.id.donutInc);
         donutDec = (ImageButton) findViewById(R.id.donutDec);
-        donutCount = (TextView) findViewById(R.id.donutCount);
+        donutCount = (TextView) findViewById(R.id.DonutCount);
         donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
@@ -327,8 +324,129 @@ public class MainActivity extends ActionBarActivity {
             Bread bread = bList.getBread(i);
             breadImages.get(i).setImageResource(getResources().getIdentifier("drawable/"+bread.getName().toLowerCase().replace(" ", ""), null,getPackageName()));
         }
+        for(int j = size; j < 6; j++){
+            breadImages.get(j).setImageResource(getResources().getIdentifier("drawable/empty", null, getPackageName()));
+        }
+    }
+    private TextView getTextView(String name){
+        TextView tv;
+        switch(name) {
+            case "Macaroon":
+                tv = macCount;
+                break;
+            case "Strawberry Pie":
+                tv = sPieCount;
+                break;
+            case "Cream Bread":
+                tv = creamCount;
+                break;
+            case "Croissant":
+                tv = croCount;
+                break;
+            case "Bread":
+                tv = breadCount;
+                break;
+            case "Morning Bread":
+                tv = mBreadCount;
+                break;
+            case "Chocolate":
+                tv = choCount;
+                break;
+            case "Choco Cup Cake":
+                tv = cCupCount;
+                break;
+            case "Sausage Bread":
+                tv = sBreadCount;
+                break;
+            case "Hot Dog":
+                tv = hDogCount;
+                break;
+            case "Snake Wrap":
+                tv = sWrapCount;
+                break;
+            case "Sandwich":
+                tv = sandCount;
+                break;
+            case "Pizza":
+                tv = pizzaCount;
+                break;
+            case "Hamburger":
+                tv = hamCount;
+                break;
+            case "Christmas Cake":
+                tv = cCakeCount;
+                break;
+            case "Shamrock Cup Cake":
+                tv = sCupCount;
+                break;
+            case "Donut":
+                tv = donutCount;
+                break;
+            case "Choco Donut":
+                tv = cDonutCount;
+                break;
+            case "Jelly Roll":
+                tv = jRollCount;
+                break;
+            case "Rice Donut":
+                tv = rDonutCount;
+                break;
+            case "Strawberry Donut":
+                tv = stDonutCount;
+                break;
+            case "Special Donut":
+                tv = sDonutCount;
+                break;
+            case "Big Chocec Cake":
+                tv = bCCCount;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid bread name: " + name);
+        }
+        return tv;
+    }
+    public void optimizeAlert(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Please Enter Required Field");
+        alert.setMessage("Press the text to enter Initial Train, Goal Train, Initial Star, and Goal Star for your hero.");
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alert.show();
     }
     private void setListeners(){
+        consume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinkedList<BreadList> bLists = tList.getLists();
+                BreadList bList = bLists.get(index);
+                for(Bread bread : bList.getBreads()){
+                    breadHM.put(bread.getName(), breadHM.get(bread.getName()) - 1);
+                    editor.putInt(bread.getName(), breadHM.get(bread.getName()));
+                    TextView tv = getTextView(bread.getName());
+                    tv.setText(Integer.toString(breadHM.get(bread.getName())));
+                }
+                editor.commit();
+                updateBreadHM(breadHM);
+                bLists.remove(index);
+                if(index != 0) {
+                    index--;
+                }
+                if(tList.getLists().size() != 0) {
+                    setBreadImage(index);
+                } else {
+                    for(ImageView bImage: breadImages){
+                        bImage.setImageResource(0);
+                    }
+                    listStar.setImageResource(0);
+                    lastList.setImageResource(0);
+                    nextList.setImageResource(0);
+                }
+            }
+        });
         nextList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -350,18 +468,24 @@ public class MainActivity extends ActionBarActivity {
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateBreadHM(breadHM);
-                ArrayList<Integer> goal = new ArrayList(4);
-                goal.add(startStarInt);
-                goal.add(endStarInt);
-                goal.add(startTrainInt);
-                goal.add(endTrainInt);
-                BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
-                tList = optimizer.optimize();
-                printBreadAlert();
-                index = 0;
-                if(tList != null){
-                    setBreadImage(index);
+                if(startStarInt == -1 || endStarInt == -1 || startTrainInt == -1 || endStarInt == -1) {
+                   optimizeAlert();
+                } else {
+                    updateBreadHM(breadHM);
+                    ArrayList<Integer> goal = new ArrayList(4);
+                    goal.add(startStarInt);
+                    goal.add(endStarInt);
+                    goal.add(startTrainInt);
+                    goal.add(endTrainInt);
+                    BreadOptimizer optimizer = new BreadOptimizer(breadHM, goal);
+                    tList = optimizer.optimize();
+                    printBreadAlert();
+                    index = 0;
+                    if (tList != null) {
+                        setBreadImage(index);
+                    }
+                    lastList.setBackgroundResource(getResources().getIdentifier("drawable/bigleftarrow", null, getPackageName()));
+                    nextList.setBackgroundResource(getResources().getIdentifier("drawable/bigrightarrow", null, getPackageName()));
                 }
             }
         });
@@ -801,7 +925,7 @@ public class MainActivity extends ActionBarActivity {
                 count++;
                 editor.putInt("Hot Dog", count);
                 editor.commit();
-                hDotCount.setText(Integer.toString(count));
+                hDogCount.setText(Integer.toString(count));
             }
         });
         hDogDec.setOnClickListener(new View.OnClickListener() {
@@ -812,7 +936,7 @@ public class MainActivity extends ActionBarActivity {
                     count--;
                     editor.putInt("Hot Dog", count);
                     editor.commit();
-                    hDotCount.setText(Integer.toString(count));
+                    hDogCount.setText(Integer.toString(count));
                 }
             }
         });
@@ -904,5 +1028,120 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+    }
+    public void setInitialTrain(final View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Set Initial Train");
+        alert.setMessage("Enter the initial Train for the hero");
+        final EditText inputText = new EditText(this);
+        inputText.setInputType(0x00000002);
+        alert.setView(inputText);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String value = inputText.getText().toString();
+                try {
+                    startTrainInt = Integer.parseInt(value);
+                    TextView tv = (TextView) v;
+                    tv.setText("Initial Train : " + Integer.toString(startTrainInt));
+                } catch (NumberFormatException nfe) {
+
+                }
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+    public void setGoalTrain(final View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Set Goal Train");
+        alert.setMessage("Enter the Goal Train for the hero");
+        final EditText inputText = new EditText(this);
+        inputText.setInputType(0x00000002);
+        alert.setView(inputText);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            final String value = inputText.getText().toString();
+            try {
+                endTrainInt = Integer.parseInt(value);
+                TextView tv = (TextView) v;
+                tv.setText("Goal Train   : " + Integer.toString(endTrainInt));
+            } catch (NumberFormatException nfe){
+
+            }
+        }
+    });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+    }
+    public void setInitialStar(final View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Set Initial Star");
+        alert.setMessage("Enter the initial star of the hero");
+        final EditText inputText = new EditText(this);
+        alert.setView(inputText);
+        inputText.setFilters(new InputFilter[]{new InputFilterMinMax(1, 6)});
+        inputText.setInputType(0x00000002);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String value = inputText.getText().toString();
+                try{
+                    startStarInt = Integer.parseInt(value);
+                    TextView tv = (TextView) v;
+                    tv.setText("Initial Star : " + Integer.toString(startStarInt));
+                } catch (NumberFormatException nfe){
+
+                }
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
+
+    }
+    public void setGoalStar(final View v){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Set Goal Star");
+        alert.setMessage("Enter the Goal star of the hero");
+        final EditText inputText = new EditText(this);
+        alert.setView(inputText);
+        inputText.setFilters(new InputFilter[]{new InputFilterMinMax(1, 6)});
+        inputText.setInputType(0x00000002);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String value = inputText.getText().toString();
+                try {
+                    endStarInt = Integer.parseInt(value);
+                    TextView tv = (TextView) v;
+                    tv.setText("Goal Star   : " + Integer.toString(endStarInt));
+                } catch (NumberFormatException nfe) {
+
+                }
+            }
+        });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alert.show();
     }
 }
