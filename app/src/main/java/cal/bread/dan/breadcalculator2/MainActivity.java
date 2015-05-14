@@ -15,36 +15,44 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ImageButton;
-
-import java.lang.reflect.Array;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
+    // A HashMap containig the number of available breads
     private LinkedHashMap<String, Integer> breadHM;
+    // SharedPreferences for storing the number of available breads
     private SharedPreferences sharedPref;
+    // Editor for the SharedPreference for editing the amount of available breads
     private SharedPreferences.Editor editor;
+    // The ImageButtons for Increment Arrow and Decrement Arrow for each bread
     private ImageButton macInc, macDec, hamInc, hamDec, sDonutInc, sDonutDec, sPieInc, sPieDec, pizzaInc, pizzaDec;
     private ImageButton stDonutInc, stDonutDec, creamInc, creamDec, sandInc, sandDec, sCupInc, sCupDec, choInc, choDec;
     private ImageButton cCupInc, cCupDec, bCCInc, bCCDec, cCakeInc, cCakeDec, rDonutInc, rDonutDec, croInc, croDec;
     private ImageButton sWrapInc, sWrapDec, jRollInc, jRollDec, breadInc, breadDec, hDogInc, hDogDec, cDonutInc, cDonutDec;
     private ImageButton mBreadInc, mBreadDec, sBreadInc, sBreadDec, donutInc, donutDec;
+    // The TextViews for the count of currently available breads
     private TextView macCount, hamCount, sDonutCount, sPieCount, pizzaCount, cCupCount, bCCCount, cCakeCount, rDonutCount, croCount;
     private TextView stDonutCount, creamCount, sandCount, sCupCount, choCount, sWrapCount, jRollCount, breadCount, hDogCount, cDonutCount;
     private TextView mBreadCount, sBreadCount, donutCount;
+    // The TextView for displaying initial amount of training, goal amount of training, initial hero level, goal hero level
     private TextView iniTrain, goalTrain, iniStar, goalStar;
+    // Buttons for Reset, Optimize, and Consume
     private Button reset, optimize, consume;
-    //TextView startTrain, startStar, endTrain, endStar;
+    // Initial values (-1) for initial hero level, goal hero level, initial amount of training, and goal amount of training
     private int startStarInt = -1, endStarInt = -1, startTrainInt = -1, endTrainInt = -1;
+    // The optimal TrainingList
     private TrainingList tList;
+    // The ImageViews for the six breads in the selected list of the optimal TrainingList
     private ImageView bread1, bread2, bread3, bread4, bread5, bread0, listStar;
+    // ImageButtons for selecting through lists in the TrainingList
     private ImageButton lastList, nextList;
+    // ArrayList containing ImageViews for the six bread images of the selected list
     private ArrayList<ImageView> breadImages;
+    // Index of the selected list of the TrainingList
     private int index = 0;
 
     @Override
@@ -54,15 +62,13 @@ public class MainActivity extends ActionBarActivity {
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         breadHM = setupHashMap();
-        updateBreadHM(breadHM);
+        // Update the HashMap containing the amount of available breads according to the SharedPreferences
+        updateBreadHM();
+        //Initialize all the buttons/textviews/imagebuttons etc
         initializeButtons();
+        // Set the listeners all the buttons/textviews/imagebuttons etc
         setListeners();
-        /*
-        endTrainInt = Integer.parseInt("7900");
-        startTrainInt = Integer.parseInt("0");
-        endStarInt = Integer.parseInt("5");
-        startStarInt = Integer.parseInt("5");
-        */
+        //Add the ImagineView of six breads of the selected list to the list
         breadImages = new ArrayList<>(6);
         breadImages.add(bread0);
         breadImages.add(bread1);
@@ -74,67 +80,21 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    private void createAlerts(){
-        AlertDialog.Builder alertSS = new AlertDialog.Builder(this);
-        final EditText inputSS = new EditText(this);
-        alertSS.setView(inputSS);
-        alertSS.setMessage("Set Current Hero Star");
-        inputSS.setFilters(new InputFilter[]{new InputFilterMinMax(1, 6)});
-        inputSS.setInputType(0x00000002);
-        alertSS.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //startStar.setText("Current Star: " + inputSS.getText());
-                startStarInt = Integer.parseInt(inputSS.getText().toString());
-            }
-        });
-        alertSS.show();
-        AlertDialog.Builder alertES = new AlertDialog.Builder(this);
-        final EditText inputES = new EditText(this);
-        inputES.setFilters(new InputFilter[]{new InputFilterMinMax(1,6)});
-        inputES.setInputType(0x00000002);
-        alertES.setMessage("Set Goal Hero Star");
-        alertES.setView(inputES);
-        alertES.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //endStar.setText("Goal Star: " + inputES.getText());
-                endStarInt = Integer.parseInt(inputES.getText().toString());
-            }
-        });
-        alertES.show();
-        AlertDialog.Builder alertST = new AlertDialog.Builder(this);
-        final EditText inputST = new EditText(this);
-        inputST.setInputType(0x00000002);
-        alertST.setMessage("Set Starting Hero Train");
-        alertST.setView(inputST);
-        alertST.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-               // startTrain.setText("Start Train: " + inputST.getText());
-                startTrainInt = Integer.parseInt(inputST.getText().toString());
-            }
-        });
-        alertST.show();
-        AlertDialog.Builder alertET = new AlertDialog.Builder(this);
-        final EditText inputET = new EditText(this);
-        inputET.setInputType(0x00000002);
-        alertET.setMessage("Set Goal Hero Train");
-        alertET.setView(inputET);
-        alertET.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                //endTrain.setText("Goal Train: " + inputET.getText());
-                endTrainInt = Integer.parseInt(inputET.getText().toString());
-            }
-        });
-        alertET.show();
-    }
+    /**
+     * Create an alert containing the lists of breads in the optimal TrainingList
+     */
     private void printBreadAlert(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         String message = "";
+        //if TrainingList exists
         if(tList != null) {
             int cost = 0;
             int train = 0;
+            // For every BreadList in the TrainingList
             for (BreadList bList : tList.getLists()) {
                 message += bList.size;
                 for (Bread bread : bList.getBreads()) {
+                    //Print bread name
                     message += "|" + bread.getName() + "|";
                 }
                 cost += bList.getCost();
@@ -142,6 +102,7 @@ public class MainActivity extends ActionBarActivity {
                 message +="|Cost: "+ cost + " |Train: " + train + "\n\n";
             }
         } else {
+            // The optimal TrainingLIst does not exist,
             message = "Not Enough Bread to Reach";
         }
         alert.setMessage(message);
@@ -171,12 +132,19 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void updateBreadHM(LinkedHashMap<String, Integer> breadHM){
+
+    /**
+     *      Update the HashMap containing the number of available breads for each bread according to the stored preference.
+     */
+    private void updateBreadHM(){
         Set<String> breads = breadHM.keySet();
         for(String name : breads) {
             breadHM.put(name, sharedPref.getInt(name,0));
         }
     }
+    /**
+     * Setup the HashMap to store the numbers of available breads
+     */
     private LinkedHashMap<String, Integer> setupHashMap(){
         LinkedHashMap<String, Integer> breadHM = new LinkedHashMap<>();
         breadHM.put("Macaroon", 0);
@@ -204,6 +172,10 @@ public class MainActivity extends ActionBarActivity {
         breadHM.put("Donut", 0);
         return breadHM;
     }
+
+    /**
+     * Initialize the Buttons, TextViews, ImageViews, and ImageButtons
+     */
     private void initializeButtons(){
         consume = (Button) findViewById(R.id.consume);
         listStar = (ImageView) findViewById(R.id.listStar);
@@ -315,6 +287,11 @@ public class MainActivity extends ActionBarActivity {
         donutCount.setText(Integer.toString(sharedPref.getInt("Donut", 0)));
 
     }
+
+    /**
+     *  Display the bread images for breads in the list that is at (index)th position of the TrainingList
+     * @param index : The index of the list in the TrainingLis
+     */
     private void setBreadImage(int index){
         BreadList bList = tList.getLists().get(index);
         int size = bList.getSize();
@@ -328,6 +305,12 @@ public class MainActivity extends ActionBarActivity {
             breadImages.get(j).setImageResource(getResources().getIdentifier("drawable/empty", null, getPackageName()));
         }
     }
+
+    /**
+     * Get the TextView according to the bread name
+     * @param name : The Bread Name
+     * @return tv       : The corresponding TextView for the input bread name
+     */
     private TextView getTextView(String name){
         TextView tv;
         switch(name) {
@@ -405,6 +388,10 @@ public class MainActivity extends ActionBarActivity {
         }
         return tv;
     }
+
+    /**
+     *      Create an alert with initial amount of training, goal amount of training, initial hero level, goal hero level is not set
+     */
     public void optimizeAlert(){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Please Enter Required Field");
@@ -417,27 +404,41 @@ public class MainActivity extends ActionBarActivity {
         });
         alert.show();
     }
+
+    /**
+     * Set the listenrs for each Button, and ImageButton
+     */
     private void setListeners(){
         consume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LinkedList<BreadList> bLists = tList.getLists();
                 BreadList bList = bLists.get(index);
+                //For each bread in the list, decrement the amount of available for
                 for(Bread bread : bList.getBreads()){
+                    // Decrement the HashMap for available breads
                     breadHM.put(bread.getName(), breadHM.get(bread.getName()) - 1);
+                    // Decrement the amount of bread in SharedPreferences
                     editor.putInt(bread.getName(), breadHM.get(bread.getName()));
                     TextView tv = getTextView(bread.getName());
+                    // Update the text containing the count of bread
                     tv.setText(Integer.toString(breadHM.get(bread.getName())));
                 }
+                //Commit the changes to the SharedPreferences
                 editor.commit();
-                updateBreadHM(breadHM);
+                // Remove the list from the TrainingList
                 bLists.remove(index);
+                //Decrement the index if index != 0
                 if(index != 0) {
                     index--;
                 }
+                //If there still lists in the TrainingList, set the bread images correspond to
+                //breads in the next list.
                 if(tList.getLists().size() != 0) {
                     setBreadImage(index);
                 } else {
+                    //The TrainingList is empty
+                    //Set the bread images to be empty image holders
                     for(ImageView bImage: breadImages){
                         bImage.setImageResource(0);
                     }
@@ -450,6 +451,7 @@ public class MainActivity extends ActionBarActivity {
         nextList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Display the breads in the next list
                 if(tList != null && index < tList.getLists().size() - 1) {
                     index++;
                     setBreadImage(index);
@@ -459,6 +461,7 @@ public class MainActivity extends ActionBarActivity {
         lastList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Display the breads in the previous list
                 if(index > 0 && tList != null){
                     index--;
                     setBreadImage(index);
@@ -468,10 +471,12 @@ public class MainActivity extends ActionBarActivity {
         optimize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //if the initial and goal values are not set, create an alert
                 if(startStarInt == -1 || endStarInt == -1 || startTrainInt == -1 || endStarInt == -1) {
                    optimizeAlert();
                 } else {
-                    updateBreadHM(breadHM);
+                    //Else start optimizing
+                    updateBreadHM();
                     ArrayList<Integer> goal = new ArrayList(4);
                     goal.add(startStarInt);
                     goal.add(endStarInt);

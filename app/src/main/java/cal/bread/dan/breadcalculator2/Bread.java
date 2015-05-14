@@ -2,6 +2,11 @@ package cal.bread.dan.breadcalculator2;
 
 /**
  * Created by Dan on 04/05/2015.
+ * A Bread consists of the following attributes
+ *         Percentage: The chance of Great Success for Bread Consumption
+ *         Train        : The amount of training that the bread offers
+ *         Star          : The level (star) of the bread
+ *         Name       : The name of the bread
  */
 public class Bread{
     private int percentage;
@@ -9,6 +14,7 @@ public class Bread{
     private int star;
     private String name;
 
+    // Constructor of Bread
     public Bread(String name) {
         percentage = percentageIs(name);
         train = trainIs(name);
@@ -16,9 +22,6 @@ public class Bread{
         this.name = name;
     }
 
-    public int getStar() {
-        return star;
-    }
     public int getPercentage() {
         return percentage;
     }
@@ -29,6 +32,11 @@ public class Bread{
         return name;
     }
 
+    /**
+     * Return the amount of training the bread offers
+     * @param name           : the name of the bread
+     * @return percentage    : the percentage of Great Success by the bread
+     */
     private int percentageIs(String name) {
         int percentage;
         switch(name) {
@@ -75,6 +83,12 @@ public class Bread{
         return percentage;
     }
 
+
+    /**
+     * Return the amount of training the bread offers
+     * @param name  : the name of the bread
+     * @return train    : the amount of training the bread offers
+     */
     private int trainIs(String name) {
         int train;
         switch(name) {
@@ -152,6 +166,12 @@ public class Bread{
         }
         return train;
     }
+
+    /**
+     * Return the amount of training the bread offers
+     * @param name  : the name of the bread
+     * @return train    : the level of the bread
+     */
     private int starIs(String name) {
         int star;
         switch(name) {
