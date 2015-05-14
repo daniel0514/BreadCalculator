@@ -15,6 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ImageButton;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.LinkedHashMap;
@@ -22,6 +30,12 @@ import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
+    // A HashMap containing the percentage of each bread
+    public LinkedHashMap<String, Integer> percentHM;
+    // A HashMap containing the amount of training for breads
+    public LinkedHashMap<String, Integer> trainHM;
+    // A HashMap containing the level for breads;
+    public LinkedHashMap<String, Integer> starHM;
     // A HashMap containig the number of available breads
     private LinkedHashMap<String, Integer> breadHM;
     // SharedPreferences for storing the number of available breads
@@ -59,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        breadHM();
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         breadHM = setupHashMap();
@@ -1148,5 +1163,88 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         alert.show();
+    }
+    /**
+     * Set Up HashMaps for bread information (trainHM, percentHM, starHM)
+     */
+    private void breadHM(){
+        //Setup trainHM
+        trainHM = new LinkedHashMap<>(23);
+        trainHM.put("Macaroon", 600);
+        trainHM.put("Hamburger", 480);
+        trainHM.put("Special Donut", 360);
+        trainHM.put("Strawberry Pie", 330);
+        trainHM.put("Chocolate", 280);
+        trainHM.put("Pizza", 264);
+        trainHM.put("Choco Cup Cake", 240);
+        trainHM.put("Shamrock Cup Cake", 200);
+        trainHM.put("Strawberry Donut", 198);
+        trainHM.put("Cream Bread", 180);
+        trainHM.put("Christmas Cake", 150);
+        trainHM.put("Sandwich", 144);
+        trainHM.put("Big Choco Cake", 140);
+        trainHM.put("Rice Donut", 108);
+        trainHM.put("Croissant", 100);
+        trainHM.put("Snake Wrap", 80);
+        trainHM.put("Jelly Roll", 60);
+        trainHM.put("Bread", 50);
+        trainHM.put("Hot Dog", 40);
+        trainHM.put("Morning Bread", 30);
+        trainHM.put("Choco Donut", 30);
+        trainHM.put("Sausage Bread", 24);
+        trainHM.put("Donut", 18);
+        //Setup percentHM
+        percentHM = new LinkedHashMap<>(23);
+        percentHM.put("Macaroon", 0);
+        percentHM.put("Hamburger", 20);
+        percentHM.put("Special Donut", 40);
+        percentHM.put("Strawberry Pie", 0);
+        percentHM.put("Chocolate", 0);
+        percentHM.put("Pizza", 20);
+        percentHM.put("Choco Cup Cake", 15);
+        percentHM.put("Shamrock Cup Cake", 30);
+        percentHM.put("Strawberry Donut", 40);
+        percentHM.put("Cream Bread", 0);
+        percentHM.put("Christmas Cake", 25);
+        percentHM.put("Sandwich", 20);
+        percentHM.put("Big Choco Cake", 50);
+        percentHM.put("Rice Donut", 40);
+        percentHM.put("Croissant", 0);
+        percentHM.put("Snake Wrap", 20);
+        percentHM.put("Jelly Roll", 40);
+        percentHM.put("Bread", 0);
+        percentHM.put("Hot Dog", 20);
+        percentHM.put("Morning Bread", 0);
+        percentHM.put("Choco Donut", 40);
+        percentHM.put("Sausage Bread", 20);
+        percentHM.put("Donut", 40);
+
+        //Setup percentHM
+        starHM = new LinkedHashMap<>(23);
+        starHM.put("Macaroon", 6);
+        starHM.put("Hamburger", 6);
+        starHM.put("Special Donut", 6);
+        starHM.put("Strawberry Pie", 5);
+        starHM.put("Chocolate", 4);
+        starHM.put("Pizza", 5);
+        starHM.put("Choco Cup Cake", 4);
+        starHM.put("Shamrock Cup Cake", 4);
+        starHM.put("Strawberry Donut", 5);
+        starHM.put("Cream Bread", 4);
+        starHM.put("Christmas Cake", 4);
+        starHM.put("Sandwich", 4);
+        starHM.put("Big Choco Cake", 4);
+        starHM.put("Rice Donut", 4);
+        starHM.put("Croissant", 3);
+        starHM.put("Snake Wrap", 3);
+        starHM.put("Jelly Roll", 3);
+        starHM.put("Bread", 2);
+        starHM.put("Hot Dog", 2);
+        starHM.put("Morning Bread", 1);
+        starHM.put("Choco Donut", 2);
+        starHM.put("Sausage Bread", 1);
+        starHM.put("Donut", 1);
+
+
     }
 }
