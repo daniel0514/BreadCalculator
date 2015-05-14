@@ -30,12 +30,6 @@ import java.util.Set;
 
 
 public class MainActivity extends ActionBarActivity {
-    // A HashMap containing the percentage of each bread
-    public LinkedHashMap<String, Integer> percentHM;
-    // A HashMap containing the amount of training for breads
-    public LinkedHashMap<String, Integer> trainHM;
-    // A HashMap containing the level for breads;
-    public LinkedHashMap<String, Integer> starHM;
     // A HashMap containig the number of available breads
     private LinkedHashMap<String, Integer> breadHM;
     // SharedPreferences for storing the number of available breads
@@ -1165,36 +1159,35 @@ public class MainActivity extends ActionBarActivity {
         alert.show();
     }
     /**
-     * Set Up HashMaps for bread information (trainHM, percentHM, starHM)
+     *Create Files of HashMaps for bread information (trainHM, percentHM, starHM)
      */
     private void breadHM(){
-        //Setup trainHM
-        trainHM = new LinkedHashMap<>(23);
-        trainHM.put("Macaroon", 600);
-        trainHM.put("Hamburger", 480);
-        trainHM.put("Special Donut", 360);
-        trainHM.put("Strawberry Pie", 330);
-        trainHM.put("Chocolate", 280);
-        trainHM.put("Pizza", 264);
-        trainHM.put("Choco Cup Cake", 240);
-        trainHM.put("Shamrock Cup Cake", 200);
-        trainHM.put("Strawberry Donut", 198);
-        trainHM.put("Cream Bread", 180);
-        trainHM.put("Christmas Cake", 150);
-        trainHM.put("Sandwich", 144);
-        trainHM.put("Big Choco Cake", 140);
-        trainHM.put("Rice Donut", 108);
-        trainHM.put("Croissant", 100);
-        trainHM.put("Snake Wrap", 80);
-        trainHM.put("Jelly Roll", 60);
-        trainHM.put("Bread", 50);
-        trainHM.put("Hot Dog", 40);
-        trainHM.put("Morning Bread", 30);
-        trainHM.put("Choco Donut", 30);
-        trainHM.put("Sausage Bread", 24);
-        trainHM.put("Donut", 18);
         //Setup percentHM
-        percentHM = new LinkedHashMap<>(23);
+        File percentHM = new File(getDir("data", MODE_PRIVATE), "percentHM.hm");
+        if(!percentHM.isFile() || !percentHM.canRead()){
+            createPercentHMFile();
+        }
+        //Set up trainHM
+        File trainHM = new File(getDir("data", MODE_PRIVATE), "trainHM.hm");
+        if(!trainHM.isFile() || !trainHM.canRead()){
+            createTrainHMFile();
+        }
+        //Set up percentHM
+        File starHM = new File(getDir("data", MODE_PRIVATE), "starHM.hm");
+        if(!starHM.isFile() || !starHM.canRead()){
+            createStarHMFile();
+        }
+
+        /*
+            File testFile = new File(getDir("data", MODE_PRIVATE), "starHM.hm");
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(testFile));
+            LinkedHashMap<String, Integer> testHM = (LinkedHashMap<String, Integer>) inputStream.readObject();
+
+         */
+
+    }
+    private void createPercentHMFile(){
+        LinkedHashMap<String, Integer> percentHM = new LinkedHashMap<>(23);
         percentHM.put("Macaroon", 0);
         percentHM.put("Hamburger", 20);
         percentHM.put("Special Donut", 40);
@@ -1218,9 +1211,54 @@ public class MainActivity extends ActionBarActivity {
         percentHM.put("Choco Donut", 40);
         percentHM.put("Sausage Bread", 20);
         percentHM.put("Donut", 40);
+        try {
+            File percentHMFile = new File(getDir("data", MODE_PRIVATE), "percentHM.hm");
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(percentHMFile));
+            outputStream.writeObject(percentHMFile);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException ioe){
+            System.out.println("Error in Creating Files\n");
+        }
 
-        //Setup percentHM
-        starHM = new LinkedHashMap<>(23);
+    }
+    private void createTrainHMFile(){
+        LinkedHashMap<String, Integer> trainHM = new LinkedHashMap<>(23);
+        trainHM.put("Macaroon", 600);
+        trainHM.put("Hamburger", 480);
+        trainHM.put("Special Donut", 360);
+        trainHM.put("Strawberry Pie", 330);
+        trainHM.put("Chocolate", 280);
+        trainHM.put("Pizza", 264);
+        trainHM.put("Choco Cup Cake", 240);
+        trainHM.put("Shamrock Cup Cake", 200);
+        trainHM.put("Strawberry Donut", 198);
+        trainHM.put("Cream Bread", 180);
+        trainHM.put("Christmas Cake", 150);
+        trainHM.put("Sandwich", 144);
+        trainHM.put("Big Choco Cake", 140);
+        trainHM.put("Rice Donut", 108);
+        trainHM.put("Croissant", 100);
+        trainHM.put("Snake Wrap", 80);
+        trainHM.put("Jelly Roll", 60);
+        trainHM.put("Bread", 50);
+        trainHM.put("Hot Dog", 40);
+        trainHM.put("Morning Bread", 30);
+        trainHM.put("Choco Donut", 30);
+        trainHM.put("Sausage Bread", 24);
+        trainHM.put("Donut", 18);
+        try {
+            File trainHMFile = new File(getDir("data", MODE_PRIVATE), "trainHM.hm");
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(trainHMFile));
+            outputStream.writeObject(trainHM);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException ioe){
+            System.out.println("Error in Creating Files\n");
+        }
+    }
+    private void createStarHMFile(){
+        LinkedHashMap<String, Integer> starHM = new LinkedHashMap<>(23);
         starHM.put("Macaroon", 6);
         starHM.put("Hamburger", 6);
         starHM.put("Special Donut", 6);
@@ -1244,7 +1282,14 @@ public class MainActivity extends ActionBarActivity {
         starHM.put("Choco Donut", 2);
         starHM.put("Sausage Bread", 1);
         starHM.put("Donut", 1);
-
-
+        try {
+            File starHMFile = new File(getDir("data", MODE_PRIVATE), "starHM.hm");
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(starHMFile));
+            outputStream.writeObject(starHM);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException ioe){
+            System.out.println("Error in Creating Files\n");
+        }
     }
 }
