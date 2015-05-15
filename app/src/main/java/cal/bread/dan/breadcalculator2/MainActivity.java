@@ -508,39 +508,41 @@ public class MainActivity extends ActionBarActivity {
         consume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinkedList<BreadList> bLists = tList.getLists();
-                BreadList bList = bLists.get(index);
-                //For each bread in the list, decrement the amount of available for
-                for(String bread : bList.getBreads()){
-                    // Decrement the HashMap for available breads
-                    breadHM.put(bread, breadHM.get(bread) - 1);
-                    // Decrement the amount of bread in SharedPreferences
-                    editor.putInt(bread, breadHM.get(bread));
-                    TextView tv = getTextView(bread);
-                    // Update the text containing the count of bread
-                    tv.setText(Integer.toString(breadHM.get(bread)));
-                }
-                //Commit the changes to the SharedPreferences
-                editor.commit();
-                // Remove the list from the TrainingList
-                bLists.remove(index);
-                //Decrement the index if index != 0
-                if(index != 0) {
-                    index--;
-                }
-                //If there still lists in the TrainingList, set the bread images correspond to
-                //breads in the next list.
-                if(tList.getLists().size() != 0) {
-                    setBreadImage(index);
-                } else {
-                    //The TrainingList is empty
-                    //Set the bread images to be empty image holders
-                    for(ImageView bImage: breadImages){
-                        bImage.setImageResource(0);
+                if (tList != null) {
+                    LinkedList<BreadList> bLists = tList.getLists();
+                    BreadList bList = bLists.get(index);
+                    //For each bread in the list, decrement the amount of available for
+                    for (String bread : bList.getBreads()) {
+                        // Decrement the HashMap for available breads
+                        breadHM.put(bread, breadHM.get(bread) - 1);
+                        // Decrement the amount of bread in SharedPreferences
+                        editor.putInt(bread, breadHM.get(bread));
+                        TextView tv = getTextView(bread);
+                        // Update the text containing the count of bread
+                        tv.setText(Integer.toString(breadHM.get(bread)));
                     }
-                    listStar.setImageResource(0);
-                    lastList.setImageResource(0);
-                    nextList.setImageResource(0);
+                    //Commit the changes to the SharedPreferences
+                    editor.commit();
+                    // Remove the list from the TrainingList
+                    bLists.remove(index);
+                    //Decrement the index if index != 0
+                    if (index != 0) {
+                        index--;
+                    }
+                    //If there still lists in the TrainingList, set the bread images correspond to
+                    //breads in the next list.
+                    if (tList.getLists().size() != 0) {
+                        setBreadImage(index);
+                    } else {
+                        //The TrainingList is empty
+                        //Set the bread images to be empty image holders
+                        for (ImageView bImage : breadImages) {
+                            bImage.setImageResource(0);
+                        }
+                        listStar.setImageResource(0);
+                        lastList.setImageResource(0);
+                        nextList.setImageResource(0);
+                    }
                 }
             }
         });
