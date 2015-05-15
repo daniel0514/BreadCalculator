@@ -26,11 +26,11 @@ import java.util.PriorityQueue;
  *           endTrain:     the goal amount of training for the hero at the goal level
  */
 public class BreadOptimizer {
-    PriorityQueue<TrainingList> listPQ;
-    LinkedHashMap<String, Integer> breadHM;
-    List<Integer> train = Arrays.asList(0, 0, 100, 800, 2900, 7900, 18500);
-    List<Integer> trainRequired = new ArrayList<>(Collections.nCopies(7, 0));
-    int startStar, endStar, startTrain, endTrain;
+    private PriorityQueue<TrainingList> listPQ;
+    private LinkedHashMap<String, Integer> breadHM;
+    private static List<Integer> train = Arrays.asList(0, 0, 100, 800, 2900, 7900, 18500);
+    private static List<Integer> trainRequired = new ArrayList<>(Collections.nCopies(7, 0));
+    private int startStar, endStar, startTrain, endTrain;
 
     /**
      *  The contructor of the optimizer

@@ -17,55 +17,43 @@ import java.util.List;
  *              levelCost        : consist of cost of bread for different hero levels
  */
 public class BreadList {
-    LinkedList<Bread> breadList;
+    private LinkedList<String> breadList;
     static LinkedHashMap<String, Integer> trainHM;
     static LinkedHashMap<String, Integer> percentHM;
     static LinkedHashMap<String, Integer> starHM;
-    int star;
-    int size = 0;
-    int cost = 0;
-    int totalPercentage = 0;
-    int totalTrain = 0;
-    List<Integer> levelCost = Arrays.asList(0, 0, 600, 1300, 1900, 3200, 4900);
+    static List<Integer> levelCost = Arrays.asList(0, 0, 600, 1300, 1900, 3200, 4900);
+    private int star;
+    private int size = 0;
+    private int cost = 0;
+    private int totalPercentage = 0;
+    private int totalTrain = 0;
 
-    //Constructor
+    //Constructor for an Empty BreadList
     public BreadList(int star){
         setUpHashMaps();
         this.star = star;
-        breadList = new LinkedList<Bread>();
+        breadList = new LinkedList<String>();
     }
-    //Constructor
-    public BreadList(int star, Bread bread){
+    //Constructor for a BreadList with one bread
+    public BreadList(int star, String bread){
         setUpHashMaps();
         this.star = star;
         breadList = new LinkedList<>();
         breadList.add(bread);
-        totalPercentage += bread.getPercentage();
-        totalTrain += bread.getTrain();
+        totalPercentage += percentHM.get(bread);
+        totalTrain += trainHM.get(bread);
         cost += levelCost.get(star);
         size = 1;
     }
-    //Constructor
-    public BreadList(int star, String bread){
-        setUpHashMaps();
-        this.star = star;
-        Bread b = new Bread(bread);
-        breadList = new LinkedList<>();
-        breadList.add(b);
-        totalPercentage += b.getPercentage();
-        totalTrain += b.getTrain();
-        cost += levelCost.get(star);
-        size = 1;
-    }
-    //Constructor
+    //Constructor for a BreadList with same Breads in the bList
     public BreadList(BreadList bList){
         setUpHashMaps();
         this.star = bList.getStar();
         this.breadList = new LinkedList<>();
-        for(Bread b: bList.getBreads()){
-            this.breadList.add(b);
-            totalPercentage += b.getPercentage();
-            totalTrain += b.getTrain();
+        for(String bread: bList.getBreads()){
+            this.breadList.add(bread);
+            totalPercentage += percentHM.get(bread);
+            totalTrain += trainHM.get(bread);
             cost +=levelCost.get(this.star);
             size++;
         }
@@ -73,22 +61,21 @@ public class BreadList {
 
     /**
      * Adding bread to the list solely with bread's name
-     * @param name  :   the name of the bread
+     * @param bread  :   the name of the bread
      * @throws ListFullException    :   Throws an exception if the list is full (6 breads in the list already)
      */
-    public void addBread(String name) throws ListFullException{
+    public void addBread(String bread) throws ListFullException{
         if(size < 6) {
-            Bread newBread = new Bread(name);
-            breadList.add(newBread);
-            totalPercentage += newBread.getPercentage();
+            breadList.add(bread);
+            totalPercentage += percentHM.get(bread);
             cost += levelCost.get(star);
-            totalTrain += newBread.getTrain();
+            totalTrain += trainHM.get(bread);
             size++;
         } else {
             throw new ListFullException();
         }
     }
-    public Bread getBread(int index){
+    public String getBread(int index){
         return breadList.get(index);
     }
 
@@ -106,22 +93,15 @@ public class BreadList {
             return returnVal;
         }
     }
-    public int getPercentage(){
-        return totalPercentage;
-    }
-
     public int getCost(){
         return cost;
     }
-
     public int getStar(){
         return star;
     }
-
-    public LinkedList<Bread> getBreads(){
+    public LinkedList<String> getBreads(){
         return breadList;
     }
-
     public int getSize(){
         return breadList.size();
     }
