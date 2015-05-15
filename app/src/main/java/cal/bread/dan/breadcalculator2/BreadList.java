@@ -28,12 +28,6 @@ public class BreadList {
     private int totalPercentage = 0;
     private int totalTrain = 0;
 
-    //Constructor for an Empty BreadList
-    public BreadList(int star){
-        setUpHashMaps();
-        this.star = star;
-        breadList = new LinkedList<String>();
-    }
     //Constructor for a BreadList with one bread
     public BreadList(int star, String bread){
         setUpHashMaps();

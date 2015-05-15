@@ -106,10 +106,10 @@ public class MainActivity extends ActionBarActivity {
             int train = 0;
             // For every BreadList in the TrainingList
             for (BreadList bList : tList.getLists()) {
-                message += bList.size;
-                for (Bread bread : bList.getBreads()) {
+                message += bList.getSize();
+                for (String bread : bList.getBreads()) {
                     //Print bread name
-                    message += "|" + bread.getName() + "|";
+                    message += "|" + bread + "|";
                 }
                 cost += bList.getCost();
                 train += bList.getTrain();
@@ -312,8 +312,8 @@ public class MainActivity extends ActionBarActivity {
         int star = bList.getStar();
         listStar.setImageResource(getResources().getIdentifier("drawable/star"+star, null, getPackageName()));
         for(int i = 0; i<size;i++){
-            Bread bread = bList.getBread(i);
-            breadImages.get(i).setImageResource(getResources().getIdentifier("drawable/"+bread.getName().toLowerCase().replace(" ", ""), null,getPackageName()));
+            String bread = bList.getBread(i);
+            breadImages.get(i).setImageResource(getResources().getIdentifier("drawable/"+bread.toLowerCase().replace(" ", ""), null,getPackageName()));
         }
         for(int j = size; j < 6; j++){
             breadImages.get(j).setImageResource(getResources().getIdentifier("drawable/empty", null, getPackageName()));
@@ -511,14 +511,14 @@ public class MainActivity extends ActionBarActivity {
                 LinkedList<BreadList> bLists = tList.getLists();
                 BreadList bList = bLists.get(index);
                 //For each bread in the list, decrement the amount of available for
-                for(Bread bread : bList.getBreads()){
+                for(String bread : bList.getBreads()){
                     // Decrement the HashMap for available breads
-                    breadHM.put(bread.getName(), breadHM.get(bread.getName()) - 1);
+                    breadHM.put(bread, breadHM.get(bread) - 1);
                     // Decrement the amount of bread in SharedPreferences
-                    editor.putInt(bread.getName(), breadHM.get(bread.getName()));
-                    TextView tv = getTextView(bread.getName());
+                    editor.putInt(bread, breadHM.get(bread));
+                    TextView tv = getTextView(bread);
                     // Update the text containing the count of bread
-                    tv.setText(Integer.toString(breadHM.get(bread.getName())));
+                    tv.setText(Integer.toString(breadHM.get(bread)));
                 }
                 //Commit the changes to the SharedPreferences
                 editor.commit();

@@ -35,6 +35,7 @@ public class TrainingList {
         this.availableBread = new LinkedHashMap<>(availableBread);
         breadLists = lists;
         this.curStar = startStar;
+        //Do a deep copy
         for(BreadList list : lists){
             totalCost += list.getCost();
             trainLevel.set(list.getStar(), trainLevel.get(list.getStar()) + list.getTrain());
